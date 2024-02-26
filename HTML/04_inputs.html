@@ -1,0 +1,130 @@
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <title>입력 형식(inputs)</title>
+    </head>
+    <body>
+        <!-- 버튼은 값을 서버로 전송하지 않기 때문에 표현하는 value 만 사용 -->
+        <input type="button" value="click me"/> 
+        <button>click me</button>
+
+        <!-- 특정 영역을 테두리로 감싸준다 -->
+        <fieldset>
+            <legend>submit 사용법</legend>
+            <form ><!-- form 태그로 감싸져야 한다 -->
+                <!-- 서버로 보낼 값이 있어야 한다 -->
+                ID : <input type="text" name="id" value="" placeholder="ID 를 입력해"/><br/>
+                PS : <input type="password"name="ps" value="" placeholder="비번 입력해" />
+                <!-- 서브밋 버튼이 있어야 한다 -->
+                <input type="submit" value="전송">
+                <!-- type="submit" =  서버로 데이터를 전송한다 -->
+            </form>
+        </fieldset>
+        <fieldset>
+            <legend>radio  & check box</legend>
+            <!-- 체크 박스는 복수 선택이 가능 하다 -->
+            <input type="checkbox" name="vehicle" value="Bike"/> Bike
+            <input type="checkbox" name="vehicle" value="Car"/> Car
+            <input type="checkbox" name="vehicle" value="Boat"/> Boat
+            <input type="checkbox" name="vehicle" value="Cycle"/> Cycle
+            <br/><br/>
+            <!-- 라디오버튼은 단일 선택만 가능 하다 -->
+            <input type="radio" name="gender" value="남"/> 남자
+            <input type="radio" name="gender" value="여"/>  여자
+            <br/>
+            <!-- 이름이 통일 되지 않으면 복수 선택이 된다 -->
+            <input type="radio" name="gender" value="남"/> 남자
+            <input type="radio" name="gende" value="여"/>  여자
+        </fieldset>
+        <fieldset>
+            <legend>file</legend>
+            <form >
+                select a file : <input type="file" name="img" value="" multiple/> <!--multiple 파일을 여러개 보낼수 있다-->
+                <input type="submit" value="업로드" />
+            </form>
+        </fieldset>
+        <fieldset>
+            <legend>text & hidden</legend>
+            First Name : <input type="text" name="First" value=""/>
+            <br/>
+            <!-- hidden 없어진게 아니라 숨기는 기능  -->
+            Last Name : <input type="hidden" name="Last" value=""/>
+        </fieldset>
+        <fieldset>
+            <legend>select & data list</legend>
+            <!-- 선택창 -->
+            자동차 선택 : 
+            <!-- 가장 위에 있는 것이 기본 선택 된다 -->
+            <select name="cars" >
+                <option value="volvo">볼보</option>
+                <option value="Benz">벤츠</option>
+                <option value="audi" selected>아우디</option><!--selected 가 있는 얘부터 기본선택이 된다-->
+                <option value="BMW">BMW</option>
+            </select>
+
+            <!-- data list (HTML5)-->
+            <!-- datalist 는 검색이 되는 select 이다 -->
+            브라우저 선택 : 
+            <!-- list와 id 의 이름이 동일 해야 한다 -->
+            <input list="browsers" name="browsers" />
+            <datalist id="browsers">
+                <!-- option 테그에 값을 넣지 않으면 자동을 value 의 값이 적용 됨 -->
+                <option value="Edge"></option>
+                <option value="FireFox">FireFox</option>
+                <option value="chrome"></option>
+                <option value="Opera">오페라</option>
+                <option value="Safari">사파리</option>
+                <!-- 모양이 다르고 이름이 다르면 구현 설명이 들어간다 -->
+            </datalist>
+        </fieldset>
+
+
+        <!-- 정말 안쓰는 것들 -->
+
+        <fieldset>
+            <legend>E-mail</legend>
+            <!-- 이메일은 form이 있어야만 동작한다 -->
+            <form>
+                ID : <input type="text" name="id" value="" required/><br/><!--required 는 필수 옵션이다-->
+                이메일 : <input type="email" name="email" value=""/>
+                <input type="submit" value="전송"/>
+            </form>
+        </fieldset>
+
+        <fieldset>
+            <legend>color & date & month</legend>
+            좋아하는 색상을 선택 하세요 : <input type="color" name="favorcolor"/>
+            <br/>
+            date(날자) : <input type="date" name="day"/>
+            <br/>
+            month(월 까지만) : <input type="month" name="month"/>
+
+        </fieldset>
+
+        <!-- 정말 안쓰는 것들... 끝 -->
+
+
+        <!-- 이미지 그래픽 적인 것들 -->
+
+        <fieldset>
+            <legend>이미지</legend>
+            <!-- alt 이미지가 오류가 낫을때 대한 설명 , (시각 장애인이 리더기에서 웹사이트를 읽을때 필요하다)법적으로 정해짐 -->
+            <img src="../img/chrome.png" width="50px" height="50px" alt="크롬아이콘"/><!--alt 이미지가 오류가 낫을때 대한 설명-->
+            <input type="image" src="../img/img02.jpg" width="50px" height="50px" alt="꽃 이미지"/>
+        </fieldset>
+
+        <fieldset>
+            <legend>그래픽 적인 것 (게이지)</legend>
+            RANGE(0~100) : 
+            <!-- 이게 몇인지 알수 없다 -->
+            <input type="range" name="point" value="50" min="0" max="100" step="50"/><!--step 으로 쪼개줄 수 있다-->
+            <br/>
+            <!-- 현재 사용량 -->
+            Disk Useage C : <meter min="0" max="100" value="20"></meter>
+            <br/>
+            Download 진행률 : 
+            <progress min="0" max="100" value="35" ></progress>
+        </fieldset>
+
+    </body>
+</html>
