@@ -1,0 +1,56 @@
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <title>JAVA SCRIPT</title>
+        <link rel="icon" href="../img/chrome.png"/>
+        <style>
+
+        </style>
+    </head>
+    <body>
+        <!-- 필수 -->
+        <button onclick="arrPush()">push</button>
+        <button onclick="arrPop()">pop</button>
+        <button onclick="arrUnshift()">unshift</button>
+        <button onclick="arrShift()">shift</button>
+        <hr/>
+        <!-- 필수 -->
+        <button onclick="">범위 자르기</button>
+        <button onclick="">splice Del</button>
+        <button onclick="">splice Add</button>
+        <hr/>
+        <button onclick="">배열 병합</button>
+        <button onclick="">delete</button>
+        <button onclick="">join</button>
+    </body>
+        <script>
+            var arr= [];
+            var i = 1;
+
+            function arrPush(){
+                console.log('마지막 인덱스에 넣기');
+                arr.push(i);
+                i++;
+                console.log(arr);
+            }
+
+            function arrPop(){
+                console.log('마지막 인덱스로 부터 빼기');
+                var num = arr.pop();
+                console.log(num,arr);
+            }
+
+            function arrUnshift(){
+                console.log('앞에서 부터 넣기');
+                arr.unshift(i);
+                i++;
+                console.log(arr);
+            }
+
+            function arrShift() {
+                console.log('앞에서 부터 빼기');
+                var num = arr.shift();
+                console.log(num,arr);
+            }
+        </script>
+</html>
