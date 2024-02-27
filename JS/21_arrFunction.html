@@ -15,17 +15,70 @@
         <button onclick="arrShift()">shift</button>
         <hr/>
         <!-- 필수 -->
-        <button onclick="">범위 자르기</button>
-        <button onclick="">splice Del</button>
-        <button onclick="">splice Add</button>
+        <button onclick="arrSlice()">범위 자르기</button>
+        <button onclick="spliceDel()">splice Del</button>
+        <button onclick="spliceAdd()">splice Add</button>
         <hr/>
-        <button onclick="">배열 병합</button>
-        <button onclick="">delete</button>
-        <button onclick="">join</button>
+        <!-- 알아만 두자 -->
+        <button onclick="arrConcat()">배열 병합</button>
+        <button onclick="arrDel()">delete</button>
+        <button onclick="arrJoin()">join</button>
     </body>
         <script>
+
+            function arrJoin(){
+                console.log(arry);
+                console.log(arry.join('-'));
+            }
+
+            function arrDel(){
+                console.log(arry);
+                delete arry[2]; // 공간은 놔두고 값을 null 의 상태로 만들기 때문에 위험하다
+                arry[2] = ''; // 값이 없으면 for문 등을 돌릴때 문제가 발생한다
+                console.log(arry);
+            }
+
+            function arrConcat(){
+                // console.log('concat');
+                // 배열1.concat(배열2,배열3,.....)
+                var arr1=[1,2,3,4,5];
+                var arr2=['A','B','C','D','E',];
+                var newArr = arr1.concat(arr2); // 앞에 있는 배열을 기준으로 순서대로 합친다
+                console.log(newArr);
+            }
+
             var arr= [];
             var i = 1;
+
+            // 원본은 유지 되고 잘라낸 배열을 반환(substring 과 같다)
+            function arrSlice(){
+                var numArr=[1,2,3,4,5];
+                //(보여줄인덱스,버릴인덱스)
+                // (x번부터 보여주고,n번부터는 버린다)
+                var newArr = numArr.slice(1,3);
+                console.log(numArr,'->',newArr);
+            }
+
+            // splice 는 특정범위의 요소를 삭제 하거나 수정,추가 가능
+            var arry = ['가','나','다','마','바','사'];
+
+            function spliceAdd(){
+                // splice(x번인덱스부터,n개를 삭제,[추가....])
+                console.log(arry);
+                arry.splice(2,2,'C','D'); // 수정
+                console.log(arry);
+            }
+
+
+            function spliceDel(){
+                // console.log('spliceDel');
+                // splice(x번인덱스부터,n개를 삭제);
+                console.log(arry);
+                // arry.splice(2,2); // 2번 인덱스 부터 2개를 지우겠다
+                // splice 로 2번 인덱스에 C,D 추가해 보기
+                arry.splice(2,0,'C','D');
+                console.log(arry);
+            }
 
             function arrPush(){
                 console.log('마지막 인덱스에 넣기');
