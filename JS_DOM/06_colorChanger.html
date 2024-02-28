@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>DOM SCRIPT</title>
+    <link rel="icon" href="">
+    <style>
+        h1{
+            color: green;
+        }
+    </style>
+</head>
+<body>
+    <h1 id="txt">글자 색상이 변경 됩니다</h1>
+    <button id="btn">색상변경</button>
+</body>
+<!-- 1. 버튼을 누르면 Text 의 색상이 변한다.
+     2. 색상은 “빨,주,노,초,파,남,보” 이다.
+     3. 보라색 까지 왔을 때 클릭 하면 다시 빨강색으로 돌아와야 한다. -->
+    <script>
+        // 1. 요소를 가져오기
+        var button = document.getElementById('btn');
+        // 1-1 재대로 가져 왔는지 확인하기
+        //값주기
+        // console.log(h1);
+        var arr =0;
+        var color=['red','orange','yellow','green','blue','navy','purple'];
+        console.log(color);
+
+        
+        button.addEventListener('click',
+        function (e){
+            var h1 = document.getElementById('txt');
+            // 코드 간결화
+                h1.style.color = color[arr];
+                arr++;
+                if (arr==7) {
+                    arr=0;
+                }
+            // if (arr== 1) {
+            //     h1.style.color = 'red';
+            // }else if (arr == 2) {
+            //     h1.style.color = 'orange';
+            // }else if (arr == 3) {
+            //     h1.style.color = 'yellow';
+            // }else if (arr == 4) {
+            //     h1.style.color = 'green';
+            // }else if (arr == 5) {
+            //     h1.style.color = 'blue';
+            // }else if (arr == 6) {
+            //     h1.style.color = 'navy';
+            // }else if (arr == 7) {
+            //     h1.style.color = 'purple';
+            //     arr=0;
+            // }
+
+            // arr++;
+            // for (var i = 0; i < color.length; i++) {
+            //     // console.log(color[i]);
+            //     if (color.length == arr) {
+            //         h1.style.color = color[i];
+            //     }
+            // };
+                
+            
+            // if (color.length == arr) {
+            //     h1.style.color = color[arr];
+            // }
+
+            
+        });
+
+    </script>
+</html>

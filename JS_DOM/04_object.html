@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>DOM SCRIPT</title>
+    <style>
+        
+    </style>
+</head>
+<body>
+    <!--event,this 객체 -->
+    <button onclick="arg1(event)">버튼 1</button>
+    <button onclick="arg1(this)">버튼 2</button>
+    <!-- 둘 다 받으면? -->
+    <p>
+        <a href="#" onclick="arg2(event,this)">클릭 1</a>
+    </p>
+    <p>
+        <a href="#" onclick="arg2(event,this)">클릭 2</a>
+    </p>
+    <p>
+        <a href="#" onclick="arg2(event,this)">클릭 3</a>
+    </p>
+    </body>
+    <script>
+        // 함수 이름은 마음데로 정할수 있다
+        function arg1(obj){
+            // event(이벤트) : 일어난 이벤트와 관련된 모든 내용 (신기한 이벤트를 만들수 있다)
+            // this(디스) : 이벤트가 일어난 당사자 (여러줄 코드를 1줄로 만들수 있다)
+            console.log('object : ',obj);
+        }
+
+        
+            function arg2(evt,elem){
+            // console.log(evt);
+            console.log(evt);
+            // 클릭한 링크 명을 콘솔로 찍으세요
+            var val = elem.innerHTML;
+            console.log(val);
+        }
+    </script>
+</html>

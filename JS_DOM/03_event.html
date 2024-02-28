@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>DOM SCRIPT</title>
+    <style>
+        div{
+            width: 250px;
+            height: 250px;
+            background-color: yellowgreen ;
+        }
+    </style>
+</head>
+<!-- onload : html 문서가 다 읽히면 발생하는 이벤트 -->
+<body onload="console.log('laoading end')">
+    <!-- 이벤트는 한 요소에 다수개를 적용 할 수 있다 -->
+    <div onmouseover="MouseEvt('over')" onmouseout="MouseEvt('out')"></div>
+    
+    <!-- inline 속성을 가지고 있는 영역 태그 -->
+    <h3>오늘의 날짜 : <span id="demo"></span> </h3>
+    <input type="button" onclick="getDay()" value="날짜 추출">
+
+    <!-- onkeydown : 키를 눌렀을때, onkeyup : 키를 땠을때-->
+    <input type="text" id="keyon" onkeydown="keyon()">
+    <input type="text" id="keyup" onkeyup="keyup()">
+    <h4 id="typing"></h4>
+
+    <!-- 뭔가가 변경이 있을 경우 -->
+    <select id="mySelect" onchange="selectOne()">
+        <option value="Audi">Audi</option>
+        <option value="BMW">BMW</option>
+        <option value="Benz">Benz</option>
+        <option value="Volvo">Volvo</option>
+    </select>
+</body>
+<script>
+        // 방법 1 (웬만하면 이렇게 단계를 쪼게서 써라)
+        function selectOne(){
+            // 1. id="mySelect" 인 요소 가져오기
+            var elem = document.getElementById('mySelect');
+            //console.log(elem);
+            // 2. 요소에서 속성 가져오기(value)
+            var val = elem.value;
+            //console.log(val);
+            // 3. id="typing" 인 요소 가져오기
+            elem = document.getElementById('typing');
+            console.log(elem);
+            // 4. 요소에서 속성 입력 하기(innerHTML="")
+            elem.innerHTML = val;
+        }
+        /*
+        // 방법 2
+        function selectOne(){
+        // 1. id="mySelect" 인 요소 사져오기
+        // console.log('selectOne');
+        var sele = document.getElementById('mySelect').value;
+         console.log(sele);
+        // 2.요소에서 속성 자져오기(value)
+         hh.innerHTML = (sele);
+        }
+        */
+
+        var hh = document.getElementById('typing');
+        // console.log(hh);
+        
+        function keyon(){ // keyon : 키 입력 자체를 체크 할 경우
+            // 가져올때.value 이렇게 붙이면 특정 값만 가져 올 수 있다
+            // 주로 외국 사이트에 접속했을때 생김
+            // 키를 누르면 일단 값을 가져오기 때문에, 아직 입력후 문자화 되어 찍힌 값을 가져오지 못한다(야 내놔)
+            // 누를 있을때 input에 전송되고 바로 값을 달라해서(키보드가 눌렸는지 여부에 많이씀)
+            var keyo = document.getElementById('keyon').value;
+            console.log(keyo);
+            
+            hh.innerHTML = keyo;
+        }
+
+        function keyup(){ // keyup : 입력한 값을 가져올 경우
+            var keyo = document.getElementById('keyup').value;
+            console.log(keyo);
+            
+            hh.innerHTML = keyo;
+            
+        }
+
+
+        var id = document.getElementById('demo');
+        // console.log(id);
+
+        function getDay(){
+            var date = new Date();
+            console.log(date);
+            // id = 'demo' 에 날짜 값이 표시 하시오
+            id.innerHTML = date;
+        }
+
+
+        // 배열을 가져올때 [] 넣고 가져와도 된다
+        var div = document.getElementsByTagName('div')[0];
+
+        // 마우스를 요소에서 올렸다 뺏다 했을때 반응
+        function MouseEvt(arg){ // 이벤트에서 무언가를 넘겨주면 함수에서 받을 수 있다
+            console.log('mouse' +arg);
+            if(arg == 'over'){
+                div.style.backgroundColor = 'red';
+            }else{
+                div.style.backgroundColor = 'yellowgreen';
+            }
+        }
+        // console.log(div);
+    </script>
+</html>

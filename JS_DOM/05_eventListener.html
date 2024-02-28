@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>DOM SCRIPT</title>
+    <link rel="icon" href="">
+    <style>
+        div{
+                width: 250px;
+                height: 250px;
+                background-color: yellowgreen ;
+                text-align: center;
+            }
+    </style>
+</head>
+<body>
+    <h4 id="msg">FOCUS NULL</h4>
+    <p><input type="text" id="txtinput"></p>
+    <div id="eventZone"></div>
+    <h4>mouse position :  <span id="pos"></span></h4>
+</body>
+    <script>
+        // 요소 가져오기
+        var msg = document.getElementById('msg');
+        var txtinput = document.getElementById('txtinput');
+        var zone = document.getElementById('eventZone');
+        var pos = document.getElementById('pos');
+
+        // console.log(msg);
+        // console.log(txtinput);
+        // console.log(zone);
+        // console.log(pos);
+
+        //이벤트 걸 요소.addEventListener('이벤트명',호출할 함수);
+        // ()은 실행해
+        // 없으면 알려만 주는거 (이거 해야되)
+        txtinput.addEventListener('focusin',fcsin);
+        // focusin 이벤트 발생시 fcsout 함수 호출 하도록
+        txtinput.addEventListener('focusout',fcsout);
+
+        // msg 에 console 에 찍히는 내용을 적용해 보세요
+        function fcsin(){
+            console.log(msg);
+            msg.innerHTML = 'FOCUD IN';
+            console.log('FOCUD IN');
+            this.style.backgroundColor = 'yellow';
+        }
+
+        function fcsout(e){ // e: 이벤트 객체를 받겠다는 뜻
+            // console.log(e); //이벤트 객체
+            // console.log(this); //이벤트 발생한 당사자
+            msg.innerHTML = 'FOCUD OUT';
+            console.log('FOCUD OUT');
+            //this.style.backgroundColor = 'white';
+            //this 대신 이벤트 객체로 this 역활을 할 수 있다.
+            console.log(e.target);
+            e.target.style.backgroundColor = 'white';
+        }
+
+         // txtinput 에 keyup 이벤트가 발생되면 msg 에 입력 내용이 표시 되도록 하자
+         //익명함수 사용 가능
+         txtinput.addEventListener('keyup',function(e){
+
+            console.log(e);
+            console.log(e.keyCode); // 엔터
+            var val = txtinput.value;
+            console.log(val);
+            msg.innerHTML = val;
+            if(e.keyCode==13){
+                txtinput.value = '';
+                alert('입력 내용이 전송 되었습니다.');
+            }
+            });
+
+        // zone - 마우스가 들어가면(mouseenter)
+        // console.log(zone);
+        // zone.addEventListener('mouseenter',function(){
+        //     var v = this.style.backgroundColor = 'red';
+        //     console.log('색상이 변경됨');
+        //     this.innerHTML= v;
+        // } );
+
+        // // zone - 마우스가 나가면(mouseout)
+        // zone.addEventListener('mouseout',function(){
+        //     var v = this.style.backgroundColor = 'yellowgreen';
+        //     console.log('색상이 변경됨');
+        //     this.innerHTML= v;
+        // } );
+
+        // // zone - 마우스가 클릭하면(click) blue
+        // zone.addEventListener('click',function(){
+        //     var v = this.style.backgroundColor = 'blue';
+        //     console.log('색상이 변경됨');
+        //     this.innerHTML= v;
+        // });
+
+        // // zone - 마우스가 더블릭하면(dblclick)
+        // zone.addEventListener('dblclick',function(){
+        //     var v = this.style.backgroundColor = 'yellow';
+        //     console.log('색상이 변경됨');
+        //     this.innerHTML= v;
+        // })
+        // backgroundColor 변경, 문구 추가(문구는 알아서)
+
+        // 코드 간결화
+        zone.addEventListener('mouseenter',callback);
+        zone.addEventListener('mouseout',callback);
+        zone.addEventListener('click',callback);
+        zone.addEventListener('dblclick',callback);
+
+        function callback(e){ //e :이벤트의 약자
+            var type =e.type;
+            console.log(type);
+            // target(타겟)
+            e.target.innerHTML = '<h3>'+type+'<h3>';
+            if(type=='click'){
+                e.target.style.backgroundColor = 'orange';
+            }else if(type =='dblclick'){
+                e.target.style.backgroundColor = 'red';
+            }else if(type == 'mouseenter'){
+                e.target.style.backgroundColor = 'yellow';
+            }else{
+                e.target.style.backgroundColor = 'yellowgreen';
+            }
+        };
+
+        // 이벤트를 html 문서 전체에 걸어준다
+        // clientX 웹 페이지 기준
+        document.addEventListener('mousemove',function(e){
+            console.log(e.clientX+'/'+e.clientY);
+            pos.innerHTML = 'X: '+e.clientX + 'Y:' +e.clientY;
+        });
+    </script>
+</html>
