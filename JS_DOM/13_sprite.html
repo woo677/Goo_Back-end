@@ -30,15 +30,23 @@
        var screen = document.getElementById('screen');
        var btn = document.getElementsByTagName('button');
        console.log(screen);
-       
+       var inter;
        var arr= [-260,-500,-770,-1035,-1280];
         var i = 0;
-        var aa=0+'px 0';
        btn[0].addEventListener('click',function(){
-            var inter = setInterval(function(){
-                var aa = screen.style.backgroundPosition = arr[i]+'px 0';
-                i++;
+            inter = setInterval(function(){
+                if (i == 5) {
+                    i = 0;
+                }
+                screen.style.backgroundPosition = arr[i]+'px 0';
+                    i++;
+                    console.log(i);
             },100);
+        });
+
+        btn[1].addEventListener('click',function(e){
+            clearInterval(inter);
+            
         });
 
 
