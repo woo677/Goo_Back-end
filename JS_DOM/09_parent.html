@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>DOM SCRIPT</title>
+    <link rel="icon" href="">
+    <style>
+
+    </style>
+</head>
+<body>
+<!-- <button onclick="winopen()">창열기</button>
+    <button onclick="winclose()">창닫기</button> -->
+    <button>창열기</button>
+    <button>창닫기</button><br/><hr/>
+    자식 창에서 받은 값 : <input type="text" id="fromChild"/><br/>
+    자식 창으로 보낼 값 : <input type="text" id="toChild"/><br/>
+    <button onclick="sendVal()">보내기</button>
+</body>
+    <script>
+        /* 방법1
+        var wi;
+        function winopen(){
+            console.log('open');
+            wi=open('','','width=400,width=400');
+        }
+
+        function winclose(){
+            console.log('dfsdf');
+            wi.close();
+        }
+        */
+
+        var btn = document.getElementsByTagName('button');
+        //console.log(btn);
+        var win;
+        btn[0].addEventListener('click',function(){
+            win = open('09_child.html','','width=400, height=100, top=0, left=0');
+        });
+
+        btn[1].addEventListener('click',function(){
+            win.close();
+        });
+
+        function sendVal(){
+            var val = document.getElementById('toChild').value;
+            console.log('send value'+val);
+            // 자식 웹으로 접근한 다음 데이터를 보내는 법
+            win.document.getElementById('fromParent').value = val;
+        }
+
+        // 자식이 이용 할 함수
+        function plus(a,b){
+            console.log('자식이 요청한 값'+(a+b));
+        }
+
+    </script>
+</html>

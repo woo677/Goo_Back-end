@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>DOM SCRIPT</title>
+    <link rel="icon" href="">
+    <style>
+        #screen{
+            width: 256px;
+            height: 256px;
+            top: 50px;
+            left: 0px;
+            position: absolute;
+            background: url('../img/sprite.png') 0px 0;
+            /* background-position-x: 200px; */
+        }
+    </style>
+</head>
+<body>
+    <div id="screen"></div>
+    <button oncl>start</button>
+    <button>stop</button>
+</body>
+    <script>
+        /*
+        1. 필요한 객체를 가져온다
+        2. 버튼의 호과를 만든다
+        3. 버튼을 누르면 이미지가 움직인다
+        */
+       var screen = document.getElementById('screen');
+       var btn = document.getElementsByTagName('button');
+       console.log(screen);
+       
+       var arr= [-260,-500,-770,-1035,-1280];
+        var i = 0;
+        var aa=0+'px 0';
+       btn[0].addEventListener('click',function(){
+            var inter = setInterval(function(){
+                var aa = screen.style.backgroundPosition = arr[i]+'px 0';
+                i++;
+            },100);
+        });
+
+
+            
+    </script>
+</html>

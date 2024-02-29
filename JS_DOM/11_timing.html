@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>DOM SCRIPT</title>
+    <link rel="icon" href="">
+    <style>
+
+    </style>
+</head>
+<body>
+    <h1 id="cnt">0</h1>
+    <button>증가</button>
+    <button>정지</button>
+    <button>3초 후 경고</button>
+</body>
+    <script>
+        var cnt = document.getElementById('cnt');
+        var bnt = document.getElementsByTagName('button');
+        var i = 0;
+        var inter;
+        // 뭔가를 삭제 할때 변수가 필요하다
+
+        bnt[0].addEventListener('click',function(e){
+            //setInterval(실행할함수,시간(ms));
+            //여러번 클릭하면 숫자 속도가 더 빨라진다
+            inter = setInterval(function(){
+                i++;
+                cnt.innerHTML = i;
+            },1000);
+            e.target.disabled = true;
+        });
+
+        bnt[1].addEventListener('click',function(e){
+            //clerInterval(중지할인터벌이 들어있는 변수)
+            clearInterval(inter);
+            cnt.innerHTML = 0;
+            i=0;
+            bnt[0].disabled = false;
+
+            // console.log(e.target);
+            // 어차피 bnt[0]이 타켓이기 때문에 target 쓸필요가 없다
+            // bnt[0].target.disabled = false;
+
+            // 이러면 중지 라는 버튼을 가르킨다
+            // e.target.disabled = false;
+        });
+
+        bnt[2].addEventListener('click',function(){
+            //setTimeout(실행할함수,시간(ms));
+            setTimeout(function(){
+                alert('3초가 지났습니다');
+            },3000);
+        });
+
+    </script>
+</html>

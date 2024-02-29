@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>DOM SCRIPT</title>
+    <link rel="icon" href="">
+    <style>
+
+    </style>
+</head>
+<body>
+    부모 창에서 받은 값 : <input type="text" id="fromParent"/><br/>
+    부모 창으로 보낼 값 : <input type="text" id="toParent"/><br/>
+    <button onclick="sendVal()">보내기</button>
+</body>
+    <script>
+        // console.log(fom);
+        function sendVal(){
+            var val = document.getElementById('toParent').value;
+            console.log(val);
+            opener.document.getElementById('fromChild').value = val;
+            // 부모의 함수를 사용
+            opener.plus(3,5);
+        }
+
+    </script>
+</html>

@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>DOM SCRIPT</title>
+    <link rel="icon" href="">
+    <style>
+
+    </style>
+</head>
+<body>
+    <!-- "mywindow()" 함수 만듬 -->
+    <button onclick="mywindow()">basic</button>
+    <button onclick="closeWin()">창닫기</button>
+
+    
+</body>
+    <script>
+        // 창 크기 알아보는 법
+         var h = window.innerHeight;
+         var w = window.innerWidth;
+         console.log('창 크기 : '+w+'/'+h);
+         //창을 열면 자동으로 창을 새로 연 브라우저가 부모가 되고 열린창은 자식이 된다
+
+         var win; // 자식창을 받아줄 변수
+        //  창 새로 열기
+        function mywindow(){
+            console.log('widow prpup');
+            //window.open(url,창제목,옵션)
+            // 옵션이 없으면 새 탭으로 띄워진다
+            /*
+            width,width = 창의 크기
+            left,left = 창의 위치 (듀얼모니터의 경우 1번창 기준)
+            resizeable = 창 크기 허용 여부 (익스플로(IE) 에서만 가능) (거의 쓸모 없음)
+            scrollbar = 컨텐츠가 새창보다 큰 경우 스크롤 생성 여부 (IE, FIRE FOX,OPERA 만 가능) (거의 쓸모 없음)
+            */
+            win = open('https://www.w3schools.com/'
+                    ,''
+                    ,'width=400,height=400,top=500,left=500,resizeable=no,scrollbar=no');
+        }   
+
+        function closeWin(){
+            console.log('widow close');
+            // 자식창을 닫기 위한 필수 조건 : 자식창을 담은 변수가 있어야 한다
+            // close(); 자식이 없으면 자신을 닫아 버림
+            win.close();
+        }
+    </script>
+</html>

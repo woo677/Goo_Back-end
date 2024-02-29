@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>DOM SCRIPT</title>
+    <link rel="icon" href="">
+    <style>
+
+    </style>
+</head>
+<body>
+    <button>alert()</button>
+    <button>confirm()</button>
+    <button>prompt()</button>
+    
+</body>
+    <script>
+        var but = document.getElementsByTagName('button');
+        // console.log(but);
+
+        but[0].addEventListener('click',
+            function(){
+                console.log('alert');
+                // 경고창이 뜨면 js가 다 멈춘다
+                alert('경고창입니다');
+        });
+
+        but[1].addEventListener('click',
+            function(){
+                //다시 물어 볼때 쓴다(진짜로 삭제 하시겠습니까)
+                //진실인지 거짓인지 값을 받아온다
+            console.log('confirm');
+            var flag =confirm('진짜로 모두 삭제 하시겠습니까?');
+            console.log(flag);
+            if (flag == false) {
+                alert('삭제 취소');
+            }else{
+                alert('삭제');
+            }
+        });
+
+        but[2].addEventListener('click',function(){
+            console.log('prompt');
+            // 값을 받고 저장을 해야 한다
+            var name = prompt('당신의 이름은?');
+            if(name == ""){
+                alert('이름을 입력 해 주세요');
+            }else{
+                alert(name +'안녕하세요');
+            }
+        });
+
+    </script>
+</html>
