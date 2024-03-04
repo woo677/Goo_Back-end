@@ -35,19 +35,19 @@
     <script>
         //span 의 바로 위 부모를 찾아라
         console.log($('span').parent());
-        // $('span').parent().css({'border' : '2px solid red'});
+        $('span').parent().css({'background-color' : 'blue'});
 
         //span 에서 부터 위의 부모를 찾아라 (parent는 기준을 잡은다음 위로 확장한다)
         //기본적으로는  html 까지 올라가서 찾는다
         console.log($('span').parents());
         // 두번째 인자 값을 넣으면 올라가서 해당 요소만 찾는다
         console.log($('span').parents('div'));
-        // $('span').parents('div').css({'border' : '2px solid red'});
+        $('span').parents('div').css({'border' : '2px solid red'});
 
         //span 에서 부터 000 까지 사이의 부모를 찾아라
         // 당사자와 지정된 부모는 제외
         console.log($('span').parentsUntil('.ancestors'));
         // .ancestors 까지 포함하여 빨간색 라인을 그려보기
-        $('span').parentsUntil('body').css({'border':'2px solid red'});
+        // $('span').parentsUntil('body').css({'border':'2px solid red'});
     </script>
 </html>

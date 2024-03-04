@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <title>J-QUERY</title>
+        <link rel="icon" href="../img/chrome.png">
+        <!-- CDN(Content Delivery Network)(유튜브) 방식 -->
+        <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+        <style>
+            div{
+                /* border: 1px solid black; */
+                margin: 5px;
+            }
+            p{
+                text-align: center;
+                border: 1px solid gray;
+                padding: 5px;
+                margin: 5px;
+            }
+        </style>
+    </head>
+    <body>
+        <div>
+            <p>ELEMENT 1</p>
+            <p class="sel">ELEMENT 2</p>
+            <p>ELEMENT 3</p>
+            <p class="sel">ELEMENT 4</p>
+        </div>
+        <div>
+            <p>ELEMENT 5</p>
+            <p class="sel">ELEMENT 6</p>
+            <p>ELEMENT 7</p>
+            <p class="sel">ELEMENT 8</p>
+        </div>
+    </body>
+    <script>
+        // 배열 개념
+        console.log($('div p').first()); //첫번째 값 가져오기
+        console.log($('div p').eq(0)); // 지정 배열에 있는 값 가져오기
+        console.log($('div p').last()); // 마지막 값 가져오기
+        console.log($('div p').eq(7)); // 지정 배열에 있는 값 가져오기
+        console.log($('div p').eq($('div p').length-1));// 지정 배열에 있는 값 가져오기
+        
+        // 필터링 개념 (걸러내다)(1차 셀렉터로 가져온 내용을 2차로 한번 더 걸러준다)
+        console.log($('div p').filter('.sel'));//클래스가 포함된 값만 가져온다
+        console.log($('div p').not('.sel'));// 클래스만 빼고 가져온다
+
+    </script>
+</html>
