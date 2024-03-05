@@ -1,0 +1,82 @@
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <title>J-QUERY</title>
+        <link rel="icon" href="../img/chrome.png">
+        <!--Content Delivery Network 방식-->
+        <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+        <style>
+            .item div{
+                display: inline;
+            }
+
+            div.item{
+                width: 80%;
+                height: 30px;
+                border: 1px solid lightgray;
+                font-size: 13;
+                padding: 10 0 0 10;
+                margin-top: 5px;
+                cursor: pointer;
+            }
+
+            div.cnt{
+                float: right;
+                width: 20px;
+                height: 20px;
+                border: 1px solid lightgray;
+                text-align: center;
+                margin-right: 10px;
+                color: orange;
+                font-weight: 600;
+            }
+        </style>
+    </head>
+    <body>
+        <div class="item">
+            <div>A 아이템 구매 수</div>
+            <div class="cnt">0</div>
+        </div>
+        <div class="item">
+            <div>B 아이템 구매 수</div>
+            <div class="cnt">0</div>
+        </div>
+        <div class="item">
+            <div>C 아이템 구매 수</div>
+            <div class="cnt">0</div>
+        </div>
+    </body>
+    <script>
+        //아이템 구메를 클릭하면 옆에 있는 숫자가 올라간다
+        var co1 = 0;
+        var co2 = 0;
+        var co3 = 0;
+
+        
+        // $('.item').eq(0).on('click',function(){
+        //     console.log('click');
+        //     co1++;
+        //     $('.cnt').eq(0).html(co1);
+        // });
+
+        // $('.item').eq(1).on('click',function(){
+        //     console.log('click');
+        //     co2++;
+        //     $('.cnt').eq(1).html(co2);
+        // });
+
+        // $('.item').eq(2).on('click',function(){
+        //     console.log('click');
+        //     co3++;
+        //     $('.cnt').eq(2).html(co3);
+        // });
+        
+
+        //간략화
+        $('.item').on('click',function(){
+            console.log($('.item'));
+            co1++;
+            $('.cnt').html(co1);
+        });
+    </script>
+</html>

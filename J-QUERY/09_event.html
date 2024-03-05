@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <title>J-QUERY</title>
+        <link rel="icon" href="../img/chrome.png">
+        <!-- CDN(Content Delivery Network)(유튜브) 방식 -->
+        <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+        <style>
+            div{
+                width: 200px;
+                height: 200px;
+                margin: 10px;
+                text-align: center;
+                float: left; /*좌에서 우로 배치*/
+            }
+            #mousezone{
+                background-color: aquamarine;
+            }
+            #overzone{
+                background-color: orange ;
+            }
+            #login_zone{
+                clear: left; /*자기가 가지고 있는 속성을 자운다*/
+                text-align: left;
+                width: 300px;
+            }
+        </style>
+    </head>
+    <body>
+        <p>클릭하면 글자 색상이 바뀝니다</p>
+        <p>클릭하면 글자 색상이 바뀝니다</p>
+        <p>클릭하면 글자 색상이 바뀝니다</p>
+        <p>클릭하면 글자 색상이 바뀝니다</p>
+        <div id="mousezone">마우스 존</div>
+        <div id="overzone">H OVER 존</div>
+        <div id="login_zone">
+            ID : <input type="text"/>
+            <br/>
+            PW : <input type="text"/>
+        </div>
+    </body>
+    <script>
+        console.log($('p'));
+        $('p').on('click',function(){
+            console.log('click');
+            $(this).css({'color':'red'}); // 클릭한 객체를 변환
+        });
+        
+        $('p').on('dblclick',function(){
+            $(this).css({'color':'black'});
+        });
+
+        // 마우스가 들어 왔을때
+        // $('#mousezone').on('mouseenter',function(){
+            //     $(this).css({'background-color':'blue'});
+        // });
+
+        // 마우스가 영역에 나갔을 때
+        // $('#mousezone').on('mouseleave',function(){
+        //     $(this).css({'background-color':'aquamarine'});
+        // });
+
+        // on을 사용하면 여러 조건을 줄 수 있다(키와 값이 짝이 있으면 오브젝트를 사용 적합하다)
+        // $(객체).on({function(){},function(){}}); 여러 조건을 쓸수 있다
+        $('#mousezone').on({
+            mouseenter:function(){
+                $(this).css({'background-color':'blue'});
+            },
+            mouseleave:function(){
+                $(this).css({'background-color':'aquamarine'});
+            },
+            mousedown:function(){
+                $(this).css({'background-color':'yellowgreen'});
+                console.log(this);
+            },
+            mouseup:function(){
+                $(this).css({'background-color':'yellow'});
+            }
+        });
+
+        // 마우스 오버 시 발생(mouseenter 와 mouseleave를 결합한 형태)
+        // hover : enter + out
+        // $('#overzone').hover(function(){},function(){}); 기본구조
+        $('#overzone').hover(
+            function(){
+                $(this).css({'background-color':'yellow'});
+            },
+            function(){
+                $(this).css({'background-color':'yellowgreen'});
+            });
+
+        //포커스가 들어 왔을때 나갔을때를 만들어 보자
+        $('#login_zone input').on({
+            focus:function(){
+                // console.log(this);
+                $(this).css({'background-color':'blue'});
+            },
+            blur:function(){
+                $(this).css({'background-color':'white'});
+            }
+        });
+        
+    </script>
+</html>

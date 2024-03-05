@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <title>J-QUERY</title>
+        <link rel="icon" href="../img/chrome.png">
+        <!-- CDN(Content Delivery Network)(유튜브) 방식 -->
+        <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+    </head>
+    <body>
+        <p>
+            ID : <input type="text" id="userId"/>
+            <button>확인</button>
+        </p>
+        <a href="#">링크 이동</a>
+    </body>
+    <script>
+        //입력한 아이디가 admin 일 경우 gdu.co.kr로 이동 된다
+        // 그 외는 google.co.kr 로 이동
+
+        // 1.input에 입력하고 버튼을 눌렀을때 admin이면 gdu.co.kr로 이동
+        $('button').on('click',function(){
+            var id = $('#userId').val();
+            console.log(id);
+            if (id == 'admin') {
+                // 속성 변경
+                $('a').attr('href','https://gdu.co.kr/main/main.html');
+            }else{
+                $('a').attr('href','https://google.co.kr');
+            }
+        });
+    </script>
+</html>

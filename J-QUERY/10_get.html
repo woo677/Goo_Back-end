@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <title>J-QUERY</title>
+        <link rel="icon" href="../img/chrome.png">
+        <!-- CDN(Content Delivery Network)(유튜브) 방식 -->
+        <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+    </head>
+    <body>
+        <input type="text" value="some text"/>
+        <p>문자<b>강조된</b>영역</p>
+        <span id="txt"></span>
+        <span id="html"></span>
+
+        <fieldset>
+            <legend>숫자 입력</legend>
+            RANGE(0~100) : 
+            <input type="range" min="0" max="100" value="30" step="1"/>
+            당싱이 선택한 값 : <span id="msg"></span>
+            <br/>
+            <button id="inc">감소</button>
+            <button id="dec">증가</button>
+        </fieldset>
+
+        <fieldset>
+            <legend>라디오 버튼</legend>
+            <div>
+                <input type="radio" name="front" value="HTML"/> HTML
+            </div>
+            <div>
+                <input type="radio" name="front" value="CSS"/> CSS
+            </div>
+            <div>
+                <input type="radio" name="front" value="JS"/> JS
+            </div>
+            <span id="selected">선택값 없음</span>
+        </fieldset>
+    </body>
+    <script>
+        // attr() 특정 속성 가져온다
+        var attr = $('input[type="text"]').attr('type');
+        console.log(attr);
+
+        // 특정 값(value 속성) 가져오기
+        var val = $('input[type="text"]').val();
+        console.log(val);
+
+        // 수정을 할때는 수정할 값이 들어가야 한다 ('속성','변경할 값')
+        $('input[type="text"]').attr('type','password');
+
+
+        //html 함수는 html을 인정하기 때문에 태그를 살려서 가져온다
+
+        //텍스트함수를 쓸때는 html을 인정하지 않기 때문에 태그를 무시하고 가져온다
+
+        var html = $('p').html();
+        var txt = $('p').text();
+        console.log(html,' == ',txt);
+
+
+        // html() : 태그 효과를 살려서 적용 한다
+        $('#html').html('<h1>thml() 과 text() 의 차이</h1>');
+
+        // text() : 태그를 단순 텍스트로 취급한다(효과 없음)
+        $('#txt').text('<h1>thml() 과 text() 의 차이</h1>');
+
+        // 당신이 선택한 값 : 1. 기본 텍스트 추가  2.값이 변한 값을 추가
+        // 1.
+        $('#msg').text("없음");
+
+        /*
+        $('input[type = "range"]').on('mouseup',function(){
+            var va = $('input[type = "range"]').val();
+            $('#msg').text(va);
+            // $('#msg').text($('input[type = "range"]').val());
+        });
+        */
+       
+       // 당신이 선택한 값 : 1. 기본 텍스트 추가  2.값이 변한 값을 추가 
+       // + 마우스가 움직일때 값변환
+       
+       var point = $('input[type="range"]').val();
+        $('#msg').html(point);
+        /*
+        $('input[type="range"]').on('mouseup',function(){
+            $('#msg').html($(this).val());
+        });
+        */
+
+        $('input[type="range"]').mousedown(function(){
+            $(this).on('mousemove',function(){
+                $('#msg').html($(this).val());
+            });
+        });
+
+        $('input[type="range"]').mouseup(function(){
+            $(this).off('mousemove');
+            point = $(this).val();
+            $('#msg').html(point);
+        });
+
+        $('#dec').click(function(){
+            point++;
+            $('input[type="range"]').val(point);
+            $('#msg').html(point);
+        });
+
+        $('#inc').click(function(){
+            point--;
+            $('input[type="range"]').val(point);
+            $('#msg').html(point);
+        });
+
+        //라디오 버튼을 클릭하면 선택값 없음 을 빠꾼다
+        $(':radio').click(function(){
+            var val = $(this).val();
+            console.log(val);
+            $('#selected').html(val);
+        });
+
+    </script>
+</html>
