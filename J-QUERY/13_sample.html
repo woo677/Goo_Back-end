@@ -73,10 +73,12 @@
         
 
         //간략화
-        $('.item').on('click',function(){
-            console.log($('.item'));
-            co1++;
-            $('.cnt').html(co1);
+        $('div.item').on('click',function(){
+            var cnt = $(this).find('div.cnt').html();
+            cnt++; // 증가(일반 문자)
+            // cnt+=1; 숫자
+            // console.log(cnt);
+            $(this).find('div.cnt').html(cnt);
         });
     </script>
 </html>

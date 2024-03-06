@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <title>J-QUERY</title>
+        <link rel="icon" href="../img/chrome.png">
+        <!-- CDN(Content Delivery Network)(유튜브) 방식 -->
+        <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+        <style>
+            .ex{
+                background-color: aquamarine;
+                text-align: center;
+                width: 200px;
+                height: 200px;
+            }
+        </style>
+    </head>
+    <body>
+        <button id="add">클래스 추가</button>
+        <button id="remove">클래스 삭제</button>
+        <button id="toggle">클래스 토글</button>
+        <div>DIV</div>
+    </body>
+    <script>
+        /* 방법 1.
+        // addClass('클래스이름')
+        $('#add').on('click',function(){
+            $('div').addClass('ex');
+        });
+
+        // removeClass('클래스이름')
+        $('#remove').on('click',function(){
+            $('div').removeClass('ex');
+        });
+
+        // toggleClass('클래스이름') // (클릭할때 마다 on,off가 된다)
+        $('#toggle').on('click',function(){
+            $('div').toggleClass('ex');
+        });
+        */
+    
+    //    $('button').on('click',function(){
+    //         switch ($(this).attr('id')) {
+    //             case 'add':
+    //             $('div').addClass('ex');
+    //                 break;
+            
+    //             case 'remove':
+    //             $('div').removeClass('ex');
+    //                 break;
+                
+    //             case 'toggle':
+    //             $('div').toggleClass('ex');
+    //                 break;
+    //         }
+    //    });
+
+    //  토글을 클릭을 했을때 on,off로 이름이 바꿔주자
+    // 1.클릭을 했을때 의 토글의 상태 가져오기
+    $('#toggle').on('click',function(){
+        $('div').toggleClass('ex');
+        /*
+        var cc = $('div').attr('class');
+        if(cc == 'ex'){
+            $('#toggle').html('on');
+        }else{
+            $('#toggle').html('off');
+        }
+        */
+    // class 보유 여부를 true/false 로 변환
+       var sw = $('div').hasClass('ex');
+       if(sw){
+            $(this).html('remove');
+        }else{
+            $(this).html('add');
+        }
+    });
+    </script>
+</html>

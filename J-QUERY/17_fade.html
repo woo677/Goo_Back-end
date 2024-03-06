@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <title>J-QUERY</title>
+        <link rel="icon" href="../img/chrome.png">
+        <!-- CDN(Content Delivery Network)(유튜브) 방식 -->
+        <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+        <style>
+            div{
+                width: 150px;
+                height: 150px;
+                background-color: green;
+                margin-top: 10px;
+                display: none;
+            }
+        </style>
+    </head>
+    <body>
+        <button id="viz">fadeIn</button>
+        <button id="inviz">fadeOut</button>
+        <button id="toggle">ON</button>
+        <div></div>
+        <br/>
+        <img src="../img/chrome.png" width="150px" alt="">
+    </body>
+    <script>
+        // fadeIn
+        $('#viz').click(function(){
+            // function은 앞에 있는게 실행 되고 마지막에 불러온다
+            $('div').fadeIn('slow',sheck);
+        });//slow | fast
+
+        //fadeOut
+        $('#inviz').click(function(){
+            $('div').fadeOut('slow',sheck);
+        });//slow | fast
+
+        $('#toggle').on('click',function(){
+            $('div').fadeToggle('slow',sheck);
+        });
+
+        //익명함수로 하면 안된다(여러 군데에서 쓰기 때문) 함수() : 즉시 실행 하아는 뜻
+        function sheck(){
+            if ($('div').css('display')=='none') {
+                $('#toggle').html('ON');
+            }else{
+                $('#toggle').html('OFF');
+            }};
+
+            // 지정한 opacity 만클 투명해 진다
+        $('img').hover(function () {
+            $(this).fadeTo('slow',0.2);
+        },function () {
+            $(this).fadeTo('slow',1);
+        });
+    </script>
+</html>

@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <title>J-QUERY</title>
+        <link rel="icon" href="../img/chrome.png">
+        <!-- CDN(Content Delivery Network)(유튜브) 방식 -->
+        <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+        <style>
+            div.meun{
+                width: 100px;
+                padding: 10px 0;
+                background-color: green;
+                text-align: center;
+                cursor: pointer;
+            }
+        </style>
+    </head>
+    <body>
+        <div class="meun">메뉴 1</div>
+        <ul>
+            <li>LIST 01</li>
+            <li>LIST 02</li>
+            <li>LIST 03</li>
+            <li>LIST 04</li>
+            <li>LIST 05</li>
+        </ul>
+        <button>OFF</button>
+        <div>
+            <p>LIST 01</p>
+            <p>LIST 02</p>
+            <p>LIST 03</p>
+            <p>LIST 04</p>
+            <p>LIST 05</p>
+        </div>
+    </body>
+    <script>
+        // hover : 들어 왔을때, 나왔 을떄
+        $('ul').hide();
+        $('div.meun').hover(function(){
+            $('ul').show(100);
+        },function(){
+            $('ul').hide(100);
+        });
+
+        $('button').on('click',function(){
+            $('p').toggle(100),function(){
+            var sw = $('p').css('display');
+            console.log(sw);
+            if (sw == 'block') {
+                $(this).html('ON');
+            }else{
+                $(this).html('OFF');
+            }
+        };
+        });
+    </script>
+</html>
