@@ -1,0 +1,51 @@
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <title>DOM SCRIPT</title>
+        <link rel="icon" href="../img/img01.jpg">
+        <style>
+            #screen{
+                width: 256px;
+                height: 256px;
+                top:50px;
+                left: 0px;
+                position: absolute;
+                background: url('../img/sprite.png') 0 0;
+            }
+        </style>
+    </head>
+    <body>
+        <div id="screen"></div>
+        <button onclick="start()">start</button>
+        <button onclick="stop()">stop</button>
+    </body>
+    <script>
+        var ani = [-21,-297,-538,-790,-1066,-1310];
+        var obj;
+        var x=0;
+
+        function start(){
+            var i = 0;
+            var screen = document.getElementById('screen');
+            obj = setInterval(function(){
+                screen.style.background = "url('../img/sprite.png') "+ani[i]+"px 0";
+                i++;
+                x+=20;
+                if(i==ani.length){
+                    i=0;
+                }
+                console.log(i);
+                screen.style.left = x;
+            },100);
+        }
+
+        function stop(){
+            console.log('stop');
+            clearInterval(obj);
+            x=0;
+            screen.start.left = x;
+        }
+
+
+    </script>    
+</html>

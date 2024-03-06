@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>DOM SCRIPT</title>
+    <link rel="icon" href="">
+    <style >
+        input[type="text"]{
+            width: 350px;
+        }
+    </style>
+</head>
+<body>
+    <input type="text" value=""/>
+    <button id="btn">JOSN 변경</button>
+</body>
+    <script>
+        //JSON = Java Script Object Notation
+        var obj ={};
+        var arr =[];
+
+        var info = {age:22};
+        info.firtName = 'ji-hoon';
+        info.lastName = 'kim';
+        // console.log(info);
+        arr.push(info);
+        console.log(arr);
+        //마지막엔 object 형태로 만들어주는게 좋다
+        obj.list=arr;
+        console.log(obj);
+
+        //json 을 문자열로 만드는 함수(stringify)
+        var txt = JSON.stringify(obj);
+        document.getElementsByTagName('input')[0].value = txt;
+        console.log(txt);
+
+        document.getElementById('btn').addEventListener('click',function(){
+            // 문자열을 json 으로 만드는 함수(parse)
+            var json = JSON.parse(txt);
+            console.log(json);
+        });
+    </script>
+</html>
