@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <title>J-QUERY</title>
+        <link rel="icon" href="../img/chrome.png">
+        <!-- CDN(Content Delivery Network)(유튜브) 방식 -->
+        <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+        <style>
+            div{
+                position: absolute;
+                width: 200px;
+                height: 50px;
+                top: 200px;
+                float: left;
+            }
+            div.first{
+                background-color: cadetblue;
+            }
+            div.second{
+                background-color: steelblue;
+                left: 220px;
+            }
+            div.third{
+                background-color: brown;
+                left: 430px;
+
+            }
+        </style>
+    </head>
+    <body>
+        <div class="first"></div>
+        <div class="second"></div>
+        <div class="third"></div>
+    </body>
+    <script>
+        // $('div').hover(function(){
+        //     $(this).animate({
+        //         height : '200px'
+        //         ,top : '50px'
+        //     },'slow');
+        // },function(){
+        //     $(this).animate({
+        //         height : '50px'
+        //         ,top : '200px'
+        //     },'slow');
+        // });
+
+        $('div').on('mouseenter',slideUp);
+        $('div').on('mouseout',function(){
+            $(this).off('mouseenter');
+            $(this).animate({top:200, height:50},'slow','swing',function(){
+                $('div').on('mouseenter',slideUp);
+            });
+        });
+
+        function slideUp(){
+            $(this).animate({top:50, height:200},'slow','swing');
+        }
+    </script>
+</html>

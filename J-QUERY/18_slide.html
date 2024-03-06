@@ -43,11 +43,31 @@
 
         // 마우스 가 영역안에서 여러번 안움직이게 하는 법
         
-        $('#flip').hover(function(){
-            $(this).next().slideDown('slow',);
-        },function(){
-            $(this).next().slideUp('slow',);
-        });
+        $('#flip').on('mouseenter',down);
         
+        $('#flip').on('mouseleave',function(){
+            $('#flip').off('mouseenter')
+            $(this).next().slideUp('slow',function(){
+                $('#flip').on('mouseenter',down)
+            });
+        });
+
+        function down(){
+            $(this).next().slideDown('slow');
+        }
+
+
+        //바법 1.
+        /*
+        $('#flip2').on('click',function(){
+            var a = $(this).next().css('display');
+            if (a == 'none') {
+                $(this).next().slideDown(0);
+            }else{
+                $(this).next().slideUp(0);
+            }
+        });
+        */
+       
     </script>
 </html>

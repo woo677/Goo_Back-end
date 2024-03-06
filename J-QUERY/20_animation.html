@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <title>J-QUERY</title>
+        <link rel="icon" href="../img/chrome.png">
+        <!-- CDN(Content Delivery Network)(유튜브) 방식 -->
+        <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+        <style>
+            #follow{
+                position: absolute;
+            }
+            #obj{
+                position: absolute;
+                background-color: green;
+                left: 50%;
+                top: 50%;
+                width: 30px;
+                height: 30px;
+            }
+        </style>
+    </head>
+    <body>
+        <div id="obj"></div>
+        <div id="follow">마우스를 따라다녀요</div>
+    </body>
+    <script>
+        // 마우스 무브 이벤트는 연속적으로 빠르게 일어나기 때문에 animate가 필요 없다
+        $(document).on('mousemove',function(e){
+            // console.log(e.clientX,'/',e.clientY);
+            $('#follow').css({
+                top : e.clientY
+                ,left : e.clientX
+            });
+        });
+
+        $(document).on('click',function(e){
+            // console.log(e.clientX,'/',e.clientY);
+            $('#obj').animate({
+                top : e.clientY
+                ,left : e.clientX
+            },'slow','swing');
+        });
+    </script>
+</html>
