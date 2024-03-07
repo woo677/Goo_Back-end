@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <title>J-QUERY</title>
+        <link rel="icon" href="../img/chrome.png">
+        <!-- CDN(Content Delivery Network)(유튜브) 방식 -->
+        <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+        <style>
+            div.paren{
+                background-color: yellow;
+                width: 400px;
+                height: 180px;
+                text-align: center;
+            }
+            div.paren div{
+                background-color: green;
+                width: 300px;
+                height: 50px;
+                margin: 20px auto; /*auto : 자동으로 위치 설정*/
+                color: white;
+                font-weight: 600;
+                line-height: 45px;
+            }
+        </style>
+    </head>
+    <body>
+        <div class="paren">
+            <b>Parent Element</b>
+            <div>Child Element 1</div>
+            <div>Child Element 2</div>
+        </div>
+        <button id="remove">remove()</button>
+        <button id="empty">empty()</button>
+    </body>
+    <script>
+        $('#remove').on('click',function(){
+            $('div.paren').remove();
+        });
+
+        $('#empty').on('click',function(){
+            $('div.paren').empty();
+        });
+    </script>
+</html>

@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <title>J-QUERY</title>
+        <link rel="icon" href="../img/chrome.png">
+        <!-- CDN(Content Delivery Network)(유튜브) 방식 -->
+        <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+        <style>
+            img{
+                width: 400px;
+                height: 300px;
+                padding: 10;
+                border:  3px solid black;
+                margin: 5px;
+            }
+        </style>
+    </head>
+    <body>
+        <img src="../img/demension.png" alt=""/>
+    </body>
+    <script>
+        // width() : content(순수 크기)
+        console.log($('img').width());
+        // 400px
+
+        // innerWidth() : content + padding(상하,좌우)
+        console.log($('img').innerWidth());
+        // 400px + 10 + 10 = 420
+
+        // outerWidth() : content + padding(상하,좌우) + border(상하,좌우)
+        console.log($('img').outerWidth());
+        // 400px + 10 + 10 + 3 + 3 = 426
+
+        // outerWidth(true) : content + padding(상하,좌우) + border(상하,좌우) + margin(상하,좌우)
+        console.log($('img').outerWidth(true));
+        // 400px + 10 + 10 + 3 + 3 + 5 + 5 = 436
+    </script>
+</html>

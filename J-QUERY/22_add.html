@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <title>J-QUERY</title>
+        <link rel="icon" href="../img/chrome.png">
+        <!-- CDN(Content Delivery Network)(유튜브) 방식 -->
+        <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+        
+    </head>
+    <body>
+        <ol>
+            <li>List Item 1</li>
+        </ol>
+        <button>append()</button>
+        <button>prepend()</button>
+        <button>after()</button>
+        <button>before()</button>
+    </body>
+    <script>
+        var i = 1;
+        $('button').on('click',function(){
+            var txt = $(this).text();
+            i++;
+            var content = '<li>List Item '+i+'</li>';
+            
+            //어팬드
+            if(txt == 'append()'){
+                $('ol').append(content); //자식요소로써 뒤에 붙는다
+            }
+
+            //프리팬드
+            if(txt == 'prepend()'){
+                $('ol').prepend(content); //자식요소로써 앞에 붙는다
+            }
+
+            //에프터
+            if(txt == 'after()'){
+                $('ol').after(content); //형제요소로써 뒤에 붙는다
+            }
+            
+            //비포
+            if(txt == 'before()'){
+                $('ol').before(content); //형제요소로써 앞에 붙는다
+            }
+        });
+    </script>
+</html>

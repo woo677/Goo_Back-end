@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <title>J-QUERY</title>
+        <link rel="icon" href="../img/chrome.png">
+        <!-- CDN(Content Delivery Network)(유튜브) 방식 -->
+        <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+        <style>
+            table, th , td{
+                border: 1px solid black;
+                border-collapse: collapse;
+            }
+            th, td{
+                padding: 10px 20px;
+            }
+        </style>
+    </head>
+    <body>
+        <table width="100%">
+            <tr>
+                <th>학번</th>
+                <th>이름</th>
+                <th>과목</th>
+                <th>학점</th>
+                <th>설명</th>
+            </tr>
+        </table>
+
+        학번 : <input type="text" id="on"/><br/>
+        이름 : <input type="text" id="name"/><br/>
+        과목 : <input type="text" id="sub"/><br/>
+        학점 : <input type="text" id="score"/><br/>
+        설명 : <input type="text" id="desc"/><br/>
+        <button>등록</button>
+    </body>
+    <script>
+        // input에 내용을 쓰고 버튼을 누루면 테이블에 추가가 된다
+        // draw : 등록 || draw() : 실행
+        $('button').on('click',draw);
+
+        $('#desc').keyup(function(e){
+            if(e.keyCode == 13){
+                draw();
+            }
+        });
+
+        function draw(){
+            /*
+            // 왠만하면 이걸 권장한다
+            var content = '<tr>';
+            content += '<td>'+$('#no').val()+'</td>';
+            content += '<td>'+$('#name').val()+'</td>';
+            content += '<td>'+$('#sub').val()+'</td>';
+            content += '<td>'+$('#score').val()+'</td>';
+            content += '<td>'+$('#desc').val()+'</td>';
+            content += '</tr>';
+            */
+
+        // 변수에 $ 앞에 쓰면 jq가 들어가 있다는 것이다
+        // jq 객체에 js를 쓰면 더이상 jq가 아니라 js가 된다
+        // for은 위에서 아래로 읽는다 이 특정 때문에  특정한 요소들의 순서가 바뀔때 오류가 난다
+            var content = '<tr>';
+            var $input = $('input[type="text"]');
+            for(var i=0;i<$input.length;i++){
+                content += '<td>'+$input.eq(i).val()+'</td>';
+            }
+            content += '</tr>';
+            $('table').append(content);
+        }
+    </script>
+</html>
