@@ -30,7 +30,8 @@ public class HomeController {
 		String val2 = rel.getParameter("val2");
 		String oper = rel.getParameter("oper");
 		logger.info(val1+""+oper+""+val2);
-		
+
+		// Integer.parseInt : 문자열에서 정수로 바꾸는 법
 		int su1 = Integer.parseInt(val1);
 		int su2 = Integer.parseInt(val2);
 		Object result = 0;
