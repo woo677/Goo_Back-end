@@ -67,5 +67,7 @@
 		<input type="submit" value="회원가입"/><br/>
 	</form>	
 	추가된 데이터 수 : ${row }
+	
+	<a href="list">회원 목록 보기</a>
 </body>
 </html>

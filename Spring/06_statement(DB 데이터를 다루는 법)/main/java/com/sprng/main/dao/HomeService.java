@@ -35,7 +35,16 @@ public class HomeService {
 		int row = dao.insert(id,pw,name,age,gender,email);
 		logger.info("dao로 부터 받은 값 : "+row);
 		
-		return 0;
+		return row;
+	}
+
+	public void list() {
+		
+		logger.info("service 접속 성공");
+
+		HomeDAO dao = new HomeDAO();
+		dao.list();
+		
 	}
 
 

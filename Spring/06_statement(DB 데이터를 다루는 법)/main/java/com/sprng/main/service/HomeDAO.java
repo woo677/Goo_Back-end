@@ -2,6 +2,7 @@ package com.sprng.main.service;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 
@@ -62,7 +63,7 @@ public class HomeDAO {
 		
 		//3. 쿼리문 실행(executeQurey(볼때만) | executeUpdate (데이터 변환))
 		int row = stmt.executeUpdate(sql);
-		logger.info("영햐받는 데이터 수 : "+row);
+		logger.info("영향받는 데이터 수 : "+row);
 		
 		//문제가 있음면 여기까지 못온다
 		success = true;
@@ -104,7 +105,47 @@ public class HomeDAO {
 		}
 		
 		
-		return 0;
+		return row;
+	}
+
+	public void list() {
+		
+		//1. 쿼리문 준비
+		String sql = "select * from member";
+		
+		//2. 실행 객체 준비
+		try {
+			PreparedStatement ps = conn.prepareStatement(sql);
+			//2-1 ? 가 있으면 대입
+			
+			
+			//3. 쿼리 실행
+			ResultSet rs = ps.executeQuery(sql);
+			
+			//4. 값 가져오기
+			while (rs.next()) {
+				//{}이게 있어야 값이 출력이된다
+				//columnLabel : 컬럼에 이름을 가져온다
+				logger.info("id : {}",rs.getString("id"));//column label
+				logger.info("pw : {}",rs.getString(2));//column index(배열의 번호를 알려줘야 한다)
+				logger.info("name : {}",rs.getString("name"));
+				logger.info("age : {}",rs.getInt("age"));
+				logger.info("gender : {}",rs.getString("gender"));
+				logger.info("email : {}",rs.getString("email"));
+				logger.info("===================");
+				
+			}
+			
+			//5자원 정리
+			ps.close();
+			rs.close();
+			conn.close();
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		
+		
 	}
 
 

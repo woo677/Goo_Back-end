@@ -57,7 +57,18 @@ public class HomeController {
 		int row = service.insert(id,pw,name,age,gender, email);
 		model.addAttribute("row",row);
 		
-		return "insert";
+		return "index";
+	}
+	
+	@RequestMapping(value = "/list", method = RequestMethod.GET)
+	public String list() {
+		logger.info("회원 목록 요청");
+		
+		HomeService service = new HomeService();
+		service.list();
+		
+		
+		return "index";
 	}
 	
 }
