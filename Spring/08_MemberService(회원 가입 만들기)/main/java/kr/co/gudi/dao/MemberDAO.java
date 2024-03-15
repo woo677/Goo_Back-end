@@ -2,6 +2,7 @@ package kr.co.gudi.dao;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
 
 import javax.naming.Context;
@@ -76,6 +77,76 @@ public class MemberDAO {
 		
 		
 		return row;
+	}
+
+
+	public boolean login(String id, String pw) {
+		
+		boolean success = false;
+		
+		//1. 쿼리문 준비
+		String sql ="select id,pw from member where id=? and pw = ?";
+		
+		//2. 실행객체 준비
+		try {
+			PreparedStatement ps = conn.prepareStatement(sql);
+			
+			//2-1 ? 대입
+			ps.setString(1, id);
+			ps.setString(2, pw);
+			
+			//3. 실행
+			ResultSet rs = ps.executeQuery();
+			
+			//4. 값 꺼내기
+			success = rs.next();
+			logger.info("+++ ",success);
+			
+			//5. 자원 반납
+			rs.close();
+			ps.close();
+			conn.close();
+			
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		return success;
+	}
+
+
+	public void list() {
+		
+		//1 쿼리문 준비
+		String sql = "SELECT id,name,age,email FROM member";
+		
+		try {
+			//2.실행 객체 준비
+			PreparedStatement ps = conn.prepareStatement(sql);
+			
+			//3 실행
+			ResultSet rs = ps.executeQuery();
+			
+			//4 데이터 가져오기
+			while (rs.next()) {
+				String id = rs.getString("id");
+				String name = rs.getString("name");
+				String age =  rs.getString("age");
+				String email =  rs.getString("email");
+				logger.info(id+" "+name+" "+age+" "+email);
+			}
+			
+			
+			//5 자원 반납
+			rs.close();
+			ps.close();
+			conn.close();
+			
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 	}
 
 }

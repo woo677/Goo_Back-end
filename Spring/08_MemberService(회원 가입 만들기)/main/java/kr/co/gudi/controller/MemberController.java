@@ -3,7 +3,9 @@ package kr.co.gudi.controller;
 
 import java.io.UnsupportedEncodingException;
 
+import javax.print.attribute.standard.Severity;
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -56,7 +58,7 @@ public class MemberController {
 		String page = "joinForm";
 		//일 할 객체 선언
 		MemberService service = new MemberService();
-		int row = service.login(id,pw,name,age,gender,email);
+		int row = service.join(id,pw,name,age,gender,email);
 		
 		logger.info("확인 여부 : "+msg);
 		
@@ -71,6 +73,47 @@ public class MemberController {
 		model.addAttribute("msg",msg);
 		
 		return page;//상황에 따라 페이지를 다르게 접속 하는법(변수 선언)
+	}
+	
+	//로그인
+	@RequestMapping(value = "/login")
+	public String login(Model model, String id,String pw,HttpSession session) { //Request 대신 이렇게 써도 된다 
+		
+			 String page = "login";
+			 String msg = "아이디 또는 비밀면호를 확인해 주세요";
+			 
+			 logger.info(id+" / "+pw);
+			 
+			 MemberService service = new MemberService();
+			 
+			 if(service.login(id,pw)) {
+				 //list.jsp로 이동
+				 page ="redirect:/list"; //list 라는 요청으로 이동시켜라 /list라는 곳으로 이동 시켜라
+				 //msg = id+"님 환영 합니다"; //redirect 사용시 model 의 값을 전달 할 수 없다
+				 session.setAttribute("loginId", id);
+			 }
+			 
+			 
+			 model.addAttribute("msg",msg);
+			 
+		return page;
+	}
+	
+	//회원 리스트
+	//method = 를 지정하지 않으면 GET,POST,PUT,DELETE 다 받는다
+	//보안이 안좋아 지기 때문에 개발이 끝난 다음에 다시 써넣어야 한다
+	@RequestMapping(value = "/list")
+	public String list(Model model, HttpSession session) {
+		logger.info("회원 리스트 요청");
+		String page = "login";
+		
+		if (session.getAttribute("loginId")!=null) {// 로그인 상태이면
+			page = "list";
+			MemberService service = new MemberService();
+			service.list();
+		}
+		
+		return "list";
 	}
 	
 }

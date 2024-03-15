@@ -9,7 +9,7 @@ public class MemberService {
 
 	Logger logger = LoggerFactory.getLogger(getClass());
 	
-	public int login(String id, String pw, String name, String age, String gender, String email) {
+	public int join(String id, String pw, String name, String age, String gender, String email) {
 	
 		//제데로 접속 했는지 확인
 		logger.info("service 접속");
@@ -19,6 +19,16 @@ public class MemberService {
 		MemberDAO dao = new MemberDAO();
 
 		return dao.join(id,pw,name,age,gender,email);
+	}
+
+	public boolean login(String id, String pw) {
+		MemberDAO dao = new MemberDAO();
+		return dao.login(id,pw);
+	}
+
+	public void list() {
+		MemberDAO dao = new MemberDAO();
+		dao.list();
 	}
 
 }
