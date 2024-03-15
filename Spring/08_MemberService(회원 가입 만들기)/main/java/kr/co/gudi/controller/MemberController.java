@@ -75,30 +75,35 @@ public class MemberController {
 		return page;//상황에 따라 페이지를 다르게 접속 하는법(변수 선언)
 	}
 	
+	//================================================
+	
 	//로그인
 	@RequestMapping(value = "/login")
 	public String login(Model model, String id,String pw,HttpSession session) { //Request 대신 이렇게 써도 된다 
 		
-		String page = "login";
-		String msg = "아이디 또는 비밀면호를 확인해 주세요";
+			 String page = "login";
+			 String msg = "아이디 또는 비밀면호를 확인해 주세요";
 			 
-		logger.info(id+" / "+pw);
+			 logger.info(id+" / "+pw);
 			 
-		MemberService service = new MemberService();
+			 MemberService service = new MemberService();
 			 
-		if(service.login(id,pw)) {
-		//"list"은 list.jsp파일로 이동하는 것
-		//redirect:/list 는 같은 컨드롤러에 /list라는 요청이 있으면으면 거기로 이동을 한다
-		// /list요청으로 이동을 했을때 list하고 다른 점이 없어 보이는 이유는 /list에 return이 있기 때문이다
-			
-		page ="redirect:/list"; //list 라는 요청으로 이동시켜라 /list라는 곳으로 이동 시켜라
-		//msg = id+"님 환영 합니다"; //redirect 사용시 model 의 값을 전달 할 수 없다
-		session.setAttribute("loginId", id);
-		}
-			 	 
-		model.addAttribute("msg",msg);
+			 if(service.login(id,pw)) {
+				 //"list"은 list.jsp파일로 이동하는 것
+				 //redirect:/list 는 같은 컨드롤러에 /list라는 요청이 있으면으면 거기로 이동을 한다
+				// /list요청으로 이동을 했을때 list하고 다른 점이 없어 보이는 이유는 /list에 return이 있기 때문이다
+				 
+				 page ="redirect:/list"; //list 라는 요청으로 이동시켜라 /list라는 곳으로 이동 시켜라
+				 //msg = id+"님 환영 합니다"; //redirect 사용시 model 의 값을 전달 할 수 없다
+				 session.setAttribute("loginId", id);
+			 }else {
+				 model.addAttribute("msg",msg);
+				 
+			 }
 			 
-	     return page;
+			 
+			 
+		return page;
 	}
 	
 	//회원 리스트
