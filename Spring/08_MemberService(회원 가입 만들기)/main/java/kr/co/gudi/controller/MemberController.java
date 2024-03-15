@@ -79,7 +79,9 @@ public class MemberController {
 	
 	//로그인
 	@RequestMapping(value = "/login")
-	public String login(Model model, String id,String pw,HttpSession session) { //Request 대신 이렇게 써도 된다 
+	// (HttpServletRequest)Request 구 버전에서 신버전으로 넘어오면서 Request.getParameter을 입력하지 않고 직접 받아오는게 가능 해졌다
+	public String login(Model model, String id,String pw,HttpSession session) { //Request 대신 이렇게 써도 된다
+	
 		
 			 String page = "login";
 			 String msg = "아이디 또는 비밀면호를 확인해 주세요";
