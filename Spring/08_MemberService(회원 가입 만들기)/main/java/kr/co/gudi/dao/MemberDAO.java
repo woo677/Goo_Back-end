@@ -204,9 +204,12 @@ public class MemberDAO {
 
 
 	public int del(String id) {
+		
+		logger.info("del 접속");
+		int row = -1;
+		
 		//1 쿼리 준비
 		String sql = "delete from member where id =?";
-		int row = -1;
 		
 		try {
 			//2 쿼리 실행문 준비
@@ -217,6 +220,7 @@ public class MemberDAO {
 			
 			//3 실행
 			row = ps.executeUpdate();
+			logger.info("지운 갯수 : "+row);
 			
 			//반납
 			ps.close();
@@ -232,3 +236,4 @@ public class MemberDAO {
 	
 
 }
+

@@ -150,29 +150,30 @@ public class MemberController {
 		return page;
 	}
 	
-	//회원 삭제 링크
+	//회원 삭제
 	@RequestMapping(value = "/del")
 	public String del(Model model,String id , HttpSession session) {
 			//1 제데로 접속 했는지 로거 찍기
 		logger.info("del 접근");
 		
 		
-		//2 실패 했을때 설정 하기
-		String page = "list";
-		int row = 0;
+		String page = "redirect:/";
 		//3 로그인 했는지 확인 하기
 		if(session.getAttribute("loginId") != null) {
 			logger.info("로그인 성공");
+			
 			//4 일 할 객제 선언
 			MemberService service = new MemberService();
 			if(service.del(id)!=-1) {
 				logger.info("회원 탈퇴");
-				page = "list";
+				page = "redirect:/list";
 			}
+			
 			
 		}
 		
-		
+		// list 페이지에 뭔가 있어야 반응을 한다
+		//그래서 list가 아닌 redirect를 이용 해야한다
 		return page;
 	}
 	
