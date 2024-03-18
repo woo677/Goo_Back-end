@@ -2,6 +2,7 @@ package kr.co.gudi.controller;
 
 
 import java.io.UnsupportedEncodingException;
+import java.util.List;
 
 import javax.print.attribute.standard.Severity;
 import javax.servlet.http.HttpServletRequest;
@@ -14,6 +15,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
+import kr.co.gudi.dto.MembereDTO;
 import kr.co.gudi.service.MemberService;
 
 @Controller //@Controller라고 알려준다
@@ -119,10 +121,60 @@ public class MemberController {
 		if (session.getAttribute("loginId")!=null) {// 로그인 상태이면
 			page = "list";
 			MemberService service = new MemberService();
-			service.list();
+			List<MembereDTO> list =  service.list(); // 여러 개의 대이터를 한번에 묶어서 가져 오는 법
+			logger.info("size : {} ",list.size());
+			model.addAttribute("list",list);
+		}else {
+			page = "redirect:/";
 		}
 		
 		return page;
 	}
 	
+	//회원 상세 보기
+	@RequestMapping(value = "/detali")
+	public String detali(Model model, String id, HttpSession session) {
+		logger.info("detali");
+		String page = "redirect:/";
+		
+		if(session.getAttribute("loginId") != null) {
+			logger.info("id : " +id);
+			
+			MemberService service = new MemberService();
+			MembereDTO dto = service.deatli(id); //한 컬럼만 가져 올때는 이 방법을 쓴다 // id 는 pk라 id 만으로 가져와도 된다
+			model.addAttribute("member",dto);
+			
+			page = "detali";
+		}
+		
+		return page;
+	}
+	
+	//회원 삭제 링크
+	@RequestMapping(value = "/del")
+	public String del(Model model,String id , HttpSession session) {
+			//1 제데로 접속 했는지 로거 찍기
+		logger.info("del 접근");
+		
+		
+		//2 실패 했을때 설정 하기
+		String page = "list";
+		int row = 0;
+		//3 로그인 했는지 확인 하기
+		if(session.getAttribute("loginId") != null) {
+			logger.info("로그인 성공");
+			//4 일 할 객제 선언
+			MemberService service = new MemberService();
+			if(service.del(id)!=-1) {
+				logger.info("회원 탈퇴");
+				page = "list";
+			}
+			
+		}
+		
+		
+		return page;
+	}
+	
 }
+

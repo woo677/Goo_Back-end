@@ -1,9 +1,12 @@
 package kr.co.gudi.service;
 
+import java.util.List;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import kr.co.gudi.dao.MemberDAO;
+import kr.co.gudi.dto.MembereDTO;
 
 public class MemberService {
 
@@ -26,9 +29,20 @@ public class MemberService {
 		return dao.login(id,pw);
 	}
 
-	public void list() {
+	public List<MembereDTO> list() {
 		MemberDAO dao = new MemberDAO();
-		dao.list();
+		return dao.list();
 	}
+
+	public MembereDTO deatli(String id) {
+		MemberDAO dao = new MemberDAO();
+		return dao.deatli(id);
+	}
+
+	public int del(String id) {
+		MemberDAO dao = new MemberDAO();
+		return dao.del(id);
+	}
+
 
 }

@@ -4,6 +4,8 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
 
 import javax.naming.Context;
 import javax.naming.InitialContext;
@@ -11,6 +13,8 @@ import javax.sql.DataSource;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+
+import kr.co.gudi.dto.MembereDTO;
 
 public class MemberDAO {
 
@@ -28,7 +32,7 @@ public class MemberDAO {
 			//1.context를 객체화
 			Context ctx = new InitialContext();
 			
-			//2 context 안에 있는 자바이름 으로 불러오기
+			//2 context 안에 있는 태그로 가져온다 자바이름 으로 불러서
 			DataSource ds = (DataSource) ctx.lookup("java:comp/env/jdbc/MariaDB");
 			
 			//3데이터 소스로 만능키 빼오기
@@ -93,7 +97,7 @@ public class MemberDAO {
 			PreparedStatement ps = conn.prepareStatement(sql);
 			
 			//2-1 ? 대입
-			ps.setString(1, id);
+			ps.setString(1, id); // 몇번째 ? 
 			ps.setString(2, pw);
 			
 			//3. 실행
@@ -117,11 +121,12 @@ public class MemberDAO {
 	}
 
 
-	public void list() {
+	public List<MembereDTO> list() {
 		
 		//1 쿼리문 준비
 		String sql = "SELECT id,name,age,email FROM member";
 		
+		List<MembereDTO> list = new ArrayList<MembereDTO>();
 		try {
 			//2.실행 객체 준비
 			PreparedStatement ps = conn.prepareStatement(sql);
@@ -129,13 +134,17 @@ public class MemberDAO {
 			//3 실행
 			ResultSet rs = ps.executeQuery();
 			
+			
 			//4 데이터 가져오기
 			while (rs.next()) {
 				String id = rs.getString("id");
 				String name = rs.getString("name");
-				String age =  rs.getString("age");
+				int age =  rs.getInt("age");
 				String email =  rs.getString("email");
 				logger.info(id+" "+name+" "+age+" "+email);
+				
+				MembereDTO dto = new MembereDTO(id, name, age, email);
+				list.add(dto);
 			}
 			
 			
@@ -148,6 +157,78 @@ public class MemberDAO {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
+		return list;
 	}
+
+
+	public MembereDTO deatli(String id) {
+		
+		String sql = "SELECT id,pw,name,age,gender,email FROM member where id=?";
+		MembereDTO dto = null;
+		logger.info("dao 접근");
+		
+		
+		try {
+			PreparedStatement ps = conn.prepareStatement(sql);			
+			ps.setString(1, id);			
+			ResultSet rs = ps.executeQuery(); // ?가 있으면 실행쿼리() 안에 아무것도 넣으면 안된다 (넣으면 오류가 난다)
+			
+			if (rs.next()) {
+				String member_id = rs.getString("id");
+				String pw = rs.getString("pw");
+				String name = rs.getString("name");
+				int age = rs.getInt("age");
+				String gender = rs.getString("gender");
+				String email = rs.getString("email");
+				logger.info(member_id+" "+pw+" "+name+" "+age+" "+gender+" "+email);
+				dto = new MembereDTO(member_id, name, age, email);
+				// 방법 1 : DTO에 직접 추가
+				// 방법 2 : DTO에 생성자 추가
+				dto.setPw(pw);
+				dto.setGender(gender);
+				
+				
+				conn.close();
+				ps.close();
+				rs.close();
+				
+			}
+			
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		return dto; 
+	}
+
+
+	public int del(String id) {
+		//1 쿼리 준비
+		String sql = "delete from member where id =?";
+		int row = -1;
+		
+		try {
+			//2 쿼리 실행문 준비
+			PreparedStatement ps = conn.prepareStatement(sql);
+			
+			//? 추가
+			ps.setString(1, id);
+			
+			//3 실행
+			row = ps.executeUpdate();
+			
+			//반납
+			ps.close();
+			conn.close();
+			
+			
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return row;
+	}
+	
 
 }
