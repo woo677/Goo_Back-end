@@ -92,7 +92,7 @@ public class MemberController {
 			 
 			 if(service.login(id,pw)) {
 				 //"list"은 list.jsp파일로 이동하는 것
-				 //redirect:/list 는 같은 컨드롤러에 /list라는 요청이 있으면으면 거기로 이동을 한다
+				 //redirect:/list 는 같은 컨드롤러(클래스)에 /list라는 요청이 있으면으면 거기로 이동을 한다
 				// /list요청으로 이동을 했을때 list하고 다른 점이 없어 보이는 이유는 /list에 return이 있기 때문이다
 				 
 				 page ="redirect:/list"; //list 라는 요청으로 이동시켜라 /list라는 곳으로 이동 시켜라
@@ -122,7 +122,7 @@ public class MemberController {
 			service.list();
 		}
 		
-		return "list";
+		return page;
 	}
 	
 }

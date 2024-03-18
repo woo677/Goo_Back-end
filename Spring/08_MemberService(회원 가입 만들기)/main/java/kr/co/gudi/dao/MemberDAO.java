@@ -18,7 +18,8 @@ public class MemberDAO {
 	
 	//이 클래스 아무데서나 쓸수 있게 맨위에 쓴다
 	Connection conn = null;
-
+	
+	//생성자
 	public MemberDAO() {
 		
 		//pool 메서드 설정
@@ -85,7 +86,7 @@ public class MemberDAO {
 		boolean success = false;
 		
 		//1. 쿼리문 준비
-		String sql ="select id,pw from member where id=? and pw = ?";
+		String sql ="select id from member where id=? and pw = ?";
 		
 		//2. 실행객체 준비
 		try {
