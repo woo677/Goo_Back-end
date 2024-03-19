@@ -29,6 +29,14 @@ public class MemberService {
 	public List<MemberDTO> list() {
 		return dao.list();
 	}
+
+	public MemberDTO detali(String id) {
+		return dao.detali(id);
+	}
+
+	public int del(String id) {
+		return dao.del(id);
+	}
 	
 	
 	

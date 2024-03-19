@@ -9,7 +9,6 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.stereotype.Service;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -38,7 +37,7 @@ public class MemerController {
 			return "joinForm";
 		}
 		
-		// 파라미터를 묶어서 가져오는 법 해쉬맥
+		// 파라미터의 값이 많을때 묶어서 가져오는 법 : 해쉬맥
 		@RequestMapping(value = "/join", method = RequestMethod.POST)
 		public String join(Model model, @RequestParam Map<String,String> param) {
 			String page = "joinForm";
@@ -93,4 +92,62 @@ public class MemerController {
 			
 			return page; 
 		}
+		
+		//회원의 자세한 정보 보기
+		@RequestMapping(value = "/detali")
+		public String detali(Model model,String id,HttpSession session)  {
+			logger.info(id);
+			
+			String page = "redirect:/list";
+			
+			if(session.getAttribute("loginId")!=null) {
+				page = "detali";
+				MemberDTO dto =  service.detali(id);
+				
+				model.addAttribute("member",dto);
+				
+			}else {
+				page = "redirect:/";
+			}
+			
+			
+			
+			return page;
+		}
+		
+		
+		@RequestMapping(value = "/del")
+		public String del(Model model,HttpSession session,String id) {
+			String page = "list";
+			int msg = -1;
+			
+			if(session.getAttribute("loginId")!=null) {
+				page = "list";  
+				msg = service.del(id);
+			}
+			
+			model.addAttribute("member",msg);
+			
+			return page;
+		}	
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
 }

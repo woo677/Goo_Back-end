@@ -27,5 +27,14 @@
 	 <select id="list" resultType="kr.co.gudi.dto.MemberDTO">
 	 	select id,name,age,email from member
 	 </select>
+	 
+	 <!-- resultType은 오로직 select에서만 쓰면 된다 -->
+	 <select id="detali" resultType="kr.co.gudi.dto.MemberDTO">
+	 	select id,pw,name, age,gender,email from member where id = #{param1};
+	 </select>
+	 
+	 <delete id="del">
+	 	delete from member where id = #{param1}
+	 </delete>
 	
 </mapper>

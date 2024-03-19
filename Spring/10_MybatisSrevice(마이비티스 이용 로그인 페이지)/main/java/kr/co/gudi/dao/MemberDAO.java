@@ -13,5 +13,10 @@ public interface MemberDAO {
 
 	// 만약 졀과 값이 한개라면 List를 사용하지 않으면 된
 	List<MemberDTO> list();
+
+	MemberDTO detali(String id);
+
+	int del(String id);
+
 	
 }
