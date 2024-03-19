@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC   "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="my.project.member.dao.MemberDAO">
+
+	<!-- insert 에서 파라미터 타입을 표시 해야 한다 -->
+	<!-- map 으로 했으면 파라메터 의 번호가 아니라 (키) 값을 써야한다  -->
+	<insert id="join" parameterType="map">
+			insert into member (id,pw,name,age,gender,email)values(#{id},#{pw},#{name},#{age},#{gender},#{email})
+	</insert>
+	
+	<!-- select에만 resultType 써라 -->
+	<select id="login" resultType="String">
+		select id from member where id = #{param1} and pw= #{param2}
+	</select>
+	
+	<!-- DTO로 받을 경우 DTO 의 풀 경로를 명시한다 -->
+	<select id="list" resultType="my.project.member.dto.MemberDTO">
+		select id,pw,name,age,gender,email from member
+	</select>
+	
+	<select id="detali" resultType="my.project.member.dto.MemberDTO">
+		select id,pw,name,age,gender,email from member where id = #{param1}
+	</select>
+	
+	<delete id="del">
+		delete from member where id =#{param1}
+	</delete>
+
+</mapper>
