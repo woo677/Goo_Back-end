@@ -122,7 +122,7 @@ public class MemerController {
 			int msg = -1;
 			
 			if(session.getAttribute("loginId")!=null) {
-				page = "list";  
+				page = "redirect:/list";  
 				msg = service.del(id);
 			}
 			
