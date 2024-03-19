@@ -1,6 +1,9 @@
 package kr.co.gudi.controller;
 
+import java.util.List;
 import java.util.Map;
+
+import javax.servlet.http.HttpSession;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -9,8 +12,10 @@ import org.springframework.stereotype.Controller;
 import org.springframework.stereotype.Service;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import kr.co.gudi.dto.MemberDTO;
 import kr.co.gudi.service.MemberService;
 
 @Controller
@@ -34,7 +39,7 @@ public class MemerController {
 		}
 		
 		// 파라미터를 묶어서 가져오는 법 해쉬맥
-		@RequestMapping(value = "/join")
+		@RequestMapping(value = "/join", method = RequestMethod.POST)
 		public String join(Model model, @RequestParam Map<String,String> param) {
 			String page = "joinForm";
 			String msg ="회원가입에 실패 했습니다";
@@ -53,5 +58,39 @@ public class MemerController {
 			model.addAttribute("msg",msg);
 			
 			return page;
+		}
+		
+		@RequestMapping(value = "/login",method = RequestMethod.POST)
+		public String login(Model model,HttpSession session, String id, String pw) {
+			
+			String page ="login";
+			
+			logger.info("id : {} / pw : {}"+id,pw);
+			
+			String loginId =  service.login(id,pw);
+			logger.info("loginId : " +loginId);
+			
+			if(loginId != null) {
+				page = "redirect:/list";
+				session.setAttribute("loginId", loginId);
+			}else {
+				model.addAttribute("msg","아이디 또는 비밀번호를 확인해 주세요");
+			}
+			
+			return page;
+		}
+		
+		@RequestMapping(value = "/list")
+		public String list(Model model,HttpSession session) {
+			logger.info("list 요청");
+			String page = "redirect:/";
+			
+			if(session.getAttribute("loginId")!=null) {
+				page = "list";
+				List<MemberDTO> list = service.list();
+				model.addAttribute("list",list);
+			}
+			
+			return page; 
 		}
 }

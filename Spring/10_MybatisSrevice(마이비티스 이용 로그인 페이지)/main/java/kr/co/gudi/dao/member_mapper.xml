@@ -12,9 +12,20 @@
 		결과값 반환
 		지원반납
 	 -->
-	 <!-- map 을 쓸때는 파라미터 번호를 쓰는게 아니다 키 값을 입력 해야한다 -->
+	 <!-- 뭉처서 들어 왔을 때 map 을 쓸때는 파라미터 번호를 쓰는게 아니다 키 값을 입력 해야한다 -->
+	 <!-- parameter 가 뭉쳐서 들어올때 어떤 형태로 들어오는지 명시해 줘야 한다 -->
 	 <insert id="join" parameterType="map">
 	 	insert into member(id,pw,name,age,gender,email)values(#{id},#{pw},#{name},#{age},#{gender},#{email})
 	 </insert>
+	 
+	 <!-- select 는 결과로 받아오므로 어떤 형태로 받아올지 지정해 줘야 한다 -->
+	 <select id="login" resultType="String">
+	 	select id from member where id = #{param1} and pw = #{param2}
+	 </select>
+	 
+	 <!-- DTO로 받을 경우 DTO 의 풀 경로를 명시한다 -->
+	 <select id="list" resultType="kr.co.gudi.dto.MemberDTO">
+	 	select id,name,age,email from member
+	 </select>
 	
 </mapper>
