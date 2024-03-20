@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans:beans xmlns="http://www.springframework.org/schema/mvc"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:beans="http://www.springframework.org/schema/beans"
+	xmlns:context="http://www.springframework.org/schema/context"
+	xmlns:mybatis-spring="http://mybatis.org/schema/mybatis-spring"
+	xsi:schemaLocation="http://www.springframework.org/schema/mvc https://www.springframework.org/schema/mvc/spring-mvc.xsd
+		http://mybatis.org/schema/mybatis-spring http://mybatis.org/schema/mybatis-spring-1.2.xsd
+		http://www.springframework.org/schema/beans https://www.springframework.org/schema/beans/spring-beans.xsd
+		http://www.springframework.org/schema/context https://www.springframework.org/schema/context/spring-context.xsd">
+
+	<!-- DispatcherServlet Context: defines this servlet's request-processing infrastructure -->
+	
+	<!-- @Controller, @Service 등의 어노테이션을 인식해 주는 설정 -->
+	<!-- Enables the Spring MVC @Controller programming model -->
+	<annotation-driven />
+
+
+	<!-- /resources/ 라는 요청이 오면 컨트롤러 요청이 아니므로 webapp/resources 폴더를 봐라 -->
+	<!-- css, image, js 파일 등을 호출할때 사용 -->
+	<!-- Handles HTTP GET requests for /resources/** by efficiently serving up static resources in the ${webappRoot}/resources directory -->
+	<resources mapping="/resources/**" location="/resources/" />
+
+	
+	<!-- @Controller 에서 변환 타입이 String일 경우 이름만으로 해당 jsp를 찾도록 해 주는 설정 -->
+	<!-- Resolves views selected for rendering by @Controllers to .jsp resources in the /WEB-INF/views directory -->
+	<beans:bean class="org.springframework.web.servlet.view.InternalResourceViewResolver">
+		<beans:property name="prefix" value="/WEB-INF/views/" />
+		<beans:property name="suffix" value=".jsp" />
+	</beans:bean>
+	
+	
+	<!-- 우리가 사용하는 어노테이션을 인식 할 수 있도록 해 주는 범위 -->
+	<context:component-scan base-package="kr.co.gudi" />
+	
+	
+	<!-- 마이바티스르를 쓸려면 -->
+	
+	<!-- DB 접속을 위한 접속 정보 -->
+	<!-- name : 이미 지정되 있음(변경할수 없는 값) -->
+	   <beans:bean name="datasource" class="org.apache.commons.dbcp.BasicDataSource">
+	   		<beans:property name="driverClassName" value="org.mariadb.jdbc.Driver"/>
+	   		<beans:property name="url" value="jdbc:mariadb://localhost:3306/mydb"/>
+	   		<beans:property name="username" value="web_user"/>
+	   		<beans:property name="password" value="pass"/>
+	   </beans:bean>
+	
+	<!-- 쿼리문이 있는 장소 설정 -->
+	<!-- id : 임의로 정할수 있음(조금을 틀려도 된다) -->
+	<!-- 메퍼를 담는 페키지는 무조건 있어야 한다 -->
+	<!-- 여러개의 매퍼를 등록할 경우 -->
+	<!-- 한개 메퍼 들록법<beans:property name="mapperLocations" value="classpath:kr/co/gudi/dao/*.xml"/>  -->
+	   <beans:bean id="sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
+	   		<beans:property name="dataSource" ref="datasource" />
+	   		<beans:property name="mapperLocations" >
+	   			<beans:list>
+	   				<beans:value>classpath:kr/co/gudi/member/dao/*.xml</beans:value>
+	   				<beans:value>classpath:kr/co/gudi/board/dao/*.xml</beans:value>
+	   			</beans:list>
+	   		</beans:property>
+	   </beans:bean>
+	
+	<!-- 마이바티스를 자동으로 연결해 주는 설정 -->
+	<!-- 중간에 뭐 들어갈지 모르겠다 -->
+	<mybatis-spring:scan base-package="kr.co.gudi.**.dao"/>
+	
+	
+</beans:beans>
