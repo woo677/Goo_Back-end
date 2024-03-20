@@ -13,3 +13,13 @@ th, td{
 button{
 	margin: 5px;
 }
+
+textarea{
+	resize: none;
+	width: 500px;
+	height: 150px;
+}
+
+input[type = "text"]{
+	width: 100%;
+}

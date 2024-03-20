@@ -1,6 +1,7 @@
 package kr.co.gudi.board.controller;
 
 import java.util.List;
+import java.util.Map;
 
 import javax.servlet.http.HttpSession;
 
@@ -10,6 +11,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import kr.co.gudi.board.dto.BoardDTO;
 import kr.co.gudi.board.service.BoardService;
@@ -64,5 +67,39 @@ public class BoardController {
 		return "redirect:/";
 	}
 	
+	@RequestMapping(value = "/writeForm")
+	public String writeForm() {
+		return "writeForm";
+	}
+	
+	@RequestMapping(value = "/write", method = RequestMethod.POST)
+	public String write(HttpSession session,@RequestParam Map<String,String> param) {
+		
+		logger.info("params = {}",param);
+		String page = "redirect:/list";
+		if(session.getAttribute("loginId")!=null) {
+			int row = service.write(param);
+			if(row <1) {
+				page = "writeForm";
+			}
+		}
+		
+		
+		return page;
+	}
+	
+	@RequestMapping(value = "/detail")
+	public String detail(Model model,HttpSession session,String idx) {
+		String page = "redirect:/list";
+		logger.info("idx : "+idx);
+		
+		if(session.getAttribute("loginId")!=null) {
+			BoardDTO bbs = service.detail(idx);
+			model.addAttribute("bbs",bbs);
+			page = "detail";
+		}
+		
+		return page;
+	}
 	
 }
