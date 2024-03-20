@@ -1,0 +1,8 @@
+create table bbs(
+	idx int(8) primary key auto_increment
+	,user_name varchar(50)
+	,subject varchar(50)
+	,content varchar(500)
+	,bHit int(8) default 0 /*default 자동으로 늘어난다*/
+	,reg_date date default current_date
+);
