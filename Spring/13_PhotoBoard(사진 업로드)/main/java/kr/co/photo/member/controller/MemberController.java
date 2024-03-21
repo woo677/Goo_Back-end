@@ -18,6 +18,20 @@ public class MemberController {
 	
 	@Autowired MemberService service;
 	
+	@RequestMapping(value = "/error/404")
+	public String notFound(Model model) {
+		model.addAttribute("code","404");
+		model.addAttribute("msg","페이지 또는 요청을 못찾음");
+		return "error";
+	}
+	
+	@RequestMapping(value = "/error/500")
+	public String serverError(Model model) {
+		model.addAttribute("code","500");
+		model.addAttribute("msg","서버 처리중 문제 발생");
+		return "error";
+	}
+	
 	//로그인 페이지 접속
 	@RequestMapping(value = "/")
 	public String main() {
