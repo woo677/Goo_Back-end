@@ -1,1 +1,36 @@
+//회원 정보
+create table member(
+	id varchar(50) primary key,
+	pw varchar(100),
+	name varchar(50),
+	age int(4),
+	gender varchar(4),
+	email varchar(100)
+);
 
+//게시판 페이지
+create table bbs(
+	idx int(8) primary key auto_increment,
+	user_name varchar(50),
+	subject varchar(50),
+	content varchar(500),
+	bHit int(8) default 0,
+	reg_date date default current_date
+);
+
+//사진 저장하는 곳
+create table photo(
+	file_idx int(8) primary key auto_increment,
+	ori_filename varchar(200),
+	new_filename varchar(200),
+	reg_date date default current_date,
+	idx int(8),
+	constraint foreign key(idx) references bbs(idx) on delete cascade
+);
+
+//관리자 저장 테이블
+create table author(
+	id varchar(50) primary key
+	,perm varchar(20)
+	,constraint foreign key(id) references member(id) on delete cascade
+);
