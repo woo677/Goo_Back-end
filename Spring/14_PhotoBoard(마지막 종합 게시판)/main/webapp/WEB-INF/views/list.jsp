@@ -12,7 +12,10 @@
 <body>
 	${loginBox}
 	<button onclick="location.href='write.go'">글쓰기</button>
-	<a href="./member_list">회원 리스트 보기</a>
+	
+	<c:if test="${sessionScope.loginInfo.perm eq 'on'}">
+		<a href="./member_list">회원 리스트 보기</a>
+	</c:if>	
 <table>
 	<tr>
 		<th>글번호</th>

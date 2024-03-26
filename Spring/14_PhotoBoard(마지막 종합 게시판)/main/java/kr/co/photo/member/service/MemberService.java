@@ -20,16 +20,25 @@ public class MemberService {
 	
 	public int join(Map<String, String> param) {
 		logger.info("회원가입 param값");
-		return dao.join(param);
+		int row = dao.join(param); // 부모 테이블에 데이터를 넣고
+		String perm = param.get("auth");// 이후 자식테이블에 넣어야 한다.
+		if(perm != null) {
+			dao.setPermission(param.get("id"),perm);			
+		}		
+		return row;
 	}
 
-	public String login(String id, String pw) {
+	public MemberDTO login(String id, String pw) {
 		logger.info("아이디 패스워드 들어왔다.");
 		return dao.login(id,pw);
 	}
 
 	public List<MemberDTO> memberList() {
 		return dao.memberList();
+	}
+
+	public int overlay(String id) {
+		return dao.overlay(id);
 	}
 
 }

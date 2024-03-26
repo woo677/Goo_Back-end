@@ -10,12 +10,34 @@
 			VALUES(#{id},#{pw},#{name},#{age},#{gender},#{email})
 	</insert>
 	
-	<select id="login" resultType="String">
-		SELECT id FROM member WHERE id = #{param1} AND pw = #{param2}
+	<select id="login" resultType="kr.co.photo.member.dto.MemberDTO">
+		SELECT 
+			m.id
+			,m.name
+			,a.perm 
+		FROM member m LEFT JOIN autor a ON m.id = a.id
+		WHERE m.id = #{param1} AND m.pw = #{param2}
 	</select>
 	
-	<select id="memberList" resultType="kr.co.photo.member.dto.MemberDTO">
-		SELECT id,pw,name,age,gender,email FROM member
+	<select id="memberList" 
+		resultType="kr.co.photo.member.dto.MemberDTO">
+		SELECT id,name,gender,email FROM member
 	</select>
+	
+	<insert id="setPermission">
+		INSERT INTO author(id,perm)VALUES(#{param1},#{param2})
+	</insert>
+	
+	<select id="overlay" resultType="int">
+		SELECT COUNT(id) FROM member WHERE id = #{param1}
+	</select>
+	
+	
+	
+	
+	
+	
+	
+	
 
 </mapper>

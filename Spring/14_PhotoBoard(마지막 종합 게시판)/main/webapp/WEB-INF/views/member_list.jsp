@@ -11,26 +11,26 @@
 </head>
 <body>
 	${loginBox}
-	
-	<a href="./member_list">회원 리스트 보기</a>
+
+	<a href="./list">리스트 보기</a>
 <table>
 	<tr>
-		<th>아이다</th>
+		<th>아이디</th>
 		<th>이름</th>
 		<th>성별</th>
 		<th>이메일</th>
 		<th>삭제</th>		
 	</tr>
 	<c:if test = "${list.size()<1}">
-		<tr><td colspan="6">회원이 없습니다.</td></tr>
+		<tr><td colspan="5">회원이 없습니다.</td></tr>
 	</c:if>
 	<c:forEach items="${list}" var="member">
 		<tr>
 			<td>${member.id}</td>
 			<td><a href="member_detail?id=${member.id}">${member.name}</a></td>
 			<td>${member.gender}</td>
-			<td>${member.email}</td>
-			<td><a href="member_del?id=${member.id}">삭제</a></td>
+			<td>${member.email}</td>	
+			<td><a href="member_del?id=${bbs.id}">삭제</a></td>
 		</tr>
 	</c:forEach>
 </table>

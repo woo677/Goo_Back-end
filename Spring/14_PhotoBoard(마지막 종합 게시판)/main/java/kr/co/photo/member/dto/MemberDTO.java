@@ -1,7 +1,6 @@
 package kr.co.photo.member.dto;
 
 public class MemberDTO {
-
 	
 	private String id;
 	private String pw;
@@ -9,7 +8,7 @@ public class MemberDTO {
 	private int age;
 	private String gender;
 	private String email;
-	
+	private String perm;
 	
 	public String getId() {
 		return id;
@@ -47,6 +46,11 @@ public class MemberDTO {
 	public void setEmail(String email) {
 		this.email = email;
 	}
-	
-	
+	public String getPerm() {
+		return perm;
+	}
+	public void setPerm(String perm) {
+		this.perm = perm;
+	}	
+
 }

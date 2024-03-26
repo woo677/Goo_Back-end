@@ -3,12 +3,12 @@ package kr.co.photo.board.dto;
 import java.sql.Date;
 
 public class PhotoDTO {
+	
 	private int file_idx;
 	private String ori_filename;
 	private String new_filename;
 	private Date reg_date;
 	private int idx;
-	
 	
 	public int getFile_idx() {
 		return file_idx;
@@ -40,5 +40,7 @@ public class PhotoDTO {
 	public void setIdx(int idx) {
 		this.idx = idx;
 	}
+	
+	
 
 }

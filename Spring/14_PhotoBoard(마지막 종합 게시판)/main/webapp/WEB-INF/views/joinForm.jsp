@@ -7,21 +7,34 @@
 <link rel="stylesheet" href="resources/common.css" type ="text/css">
 <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
 <style>
+	input[name="id"]{
+		width:70%;
+	}
 </style>
 </head>
 <body>
 	<h3>회원가입</h3>
 	
 	<hr/>
-	<form action="join" method = "post">
+	<form action="join.do" method = "post">
 		<table>
 			<tr>
 				<th>ID</th>
-				<td><input type="text" name="id"/></td>
+				<td>
+					<input type="text" name="id"/>
+					<input type="button" value="중복체크" onclick="overlay()"/>
+				</td>
 			</tr>
 			<tr>
 				<th>PW</th>
 				<td><input type="text" name="pw"/></td>
+			</tr>
+			<tr>
+				<th>관리자</th>
+				<td>
+					<input type="checkbox" name="auth"/>
+					관리자 여부
+				</td>
 			</tr>
 			<tr>
 				<th>NAME</th>
@@ -48,12 +61,38 @@
 			</tr>
 		</table>
 	</form>
-	${msg}
 </body>
 <script>
 	var msg = '${msg}'; // 쿼터 빠지면 넣은 문구가 변수로 인식됨.
 	if(msg != ''){
 		alert(msg);
 	}
+	
+	function overlay(){
+		var id = $('input[name="id"]').val();
+		// ajax 를 이용한 비동기 통신		
+		$.ajax({
+			type:'post', // method 방식
+			url:'overlay.do', // 요청할 주소
+			data:{'id':id}, //파라메터
+			success:function(data){//통신 성공시
+				// ajax 에서 XmlHttpRequest 객체를 통해 대신 받아와서
+				// 여기에 뿌려준다.
+				console.log(data);
+				if(data.use > 0){
+					alert('이미 사용중인 아이디 입니다.');
+					$('input[name="id"]').val('');
+				}else{
+					alert('사용 가능한 아이디 입니다.');
+				}			
+			},
+			error:function(error){//통신 실패시
+				console.log(error);
+			}
+		});
+	}
+	
+	
+	
 </script>
 </html>

@@ -11,7 +11,7 @@
 </head>
 <body>
 	<h2>회원관리 시스템 로그인</h2>
-	<form action="login" method="post">
+	<form action="login.do" method="post">
 		<table>
 			<tr>
 				<th>ID</th>
@@ -41,7 +41,7 @@
 	$('input[type="button"]').on('click',function(){
 		console.log('click');
 		// spring 에서는 jsp 이름도 controller 를 통해야 한다.
-		location.href='joinForm';
+		location.href='join.go';
 	});
 
 </script>

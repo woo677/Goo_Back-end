@@ -6,22 +6,26 @@
 <mapper namespace="kr.co.photo.board.dao.BoardDAO">
 
 	<select id="list" resultType="kr.co.photo.board.dto.BoardDTO">
-		SELECT idx,subject,user_name,bHit,reg_date FROM bbs
+		SELECT idx,subject,user_name,bHit,reg_date
+			FROM bbs
 	</select>
 	
 	<insert id="write" 
 		useGeneratedKeys="true"
 		keyColumn="idx"
 		keyProperty="idx"
-		parameterType="kr.co.photo.board.dto.BoardDTO"
-	>
-		insert into bbs(subject,user_name,content)values(#{subject},#{user_name},#{content})
+		parameterType="kr.co.photo.board.dto.BoardDTO">
+		INSERT INTO bbs(subject, user_name, content)
+			VALUES(#{subject}, #{user_name}, #{content})
 	</insert>
 	
 	<insert id="writePhoto">
-		insert into photo(idx,ori_filename,new_filename)
-			values(#{param1},#{param2},#{param3})
+		INSERT INTO photo(idx,ori_filename, new_filename)
+			VALUES(#{param1},#{param2}, #{param3})
 	</insert>
+	
+	
+	
 	
 	
 

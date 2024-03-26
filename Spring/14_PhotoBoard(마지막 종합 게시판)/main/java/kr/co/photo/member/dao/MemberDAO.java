@@ -9,8 +9,12 @@ public interface MemberDAO {
 
 	int join(Map<String, String> param);
 
-	String login(String id, String pw);
+	MemberDTO login(String id, String pw);
 
 	List<MemberDTO> memberList();
+
+	void setPermission(String id, String perm);
+
+	int overlay(String id);
 
 }
