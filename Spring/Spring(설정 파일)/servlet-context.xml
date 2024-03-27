@@ -15,10 +15,12 @@
 	<!-- Enables the Spring MVC @Controller programming model -->
 	<annotation-driven />
 
+	<!-- /resources/ 라는 요청이 오면 컨트롤러 요청이 아니므로 webapp/resources 폴더를 봐라 -->
 	<!-- image, css 등을 부를때 사용 -->
 	<!-- Handles HTTP GET requests for /resources/** by efficiently serving up static resources in the ${webappRoot}/resources directory -->
 	<resources mapping="/resources/**" location="/resources/" />
 
+	<!-- @Controller 에서 이름을 쓰면 jsp 를 알아서 찾아주는 설정 -->
 	<!-- 이름만 넣으면 jsp 를 찾아줌 -->
 	<!-- Resolves views selected for rendering by @Controllers to .jsp resources in the /WEB-INF/views directory -->
 	<beans:bean class="org.springframework.web.servlet.view.InternalResourceViewResolver">
