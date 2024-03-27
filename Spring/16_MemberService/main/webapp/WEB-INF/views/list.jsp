@@ -53,12 +53,12 @@ listCall();
 //선택된 글 지우기
 // 체크 표시된 value을 delArr에 담아보자
 // 체크 표시를 했을때 내가 선택한 값에 배열에 담김 
-function del(){
+function del(){ //선택한 채크 박스의 값을 배열에 넣기(내가 뭘 선택했는지 보기)
 	console.log('click');
 	var delArr=[];
 	//클릭을 했을때 .each() for 문 처럼 반복 된다
 	$('input[name="del"]').each(function(idx,item){
-		//클릭된 아이템이 있는지 확인한다
+		//:checked이 되어있는 아이템이 있는지 확인한다
 		if($(item).is(':checked')){
 		//있으면 this로 선택된 아이템의 값을 배열에 저장한다
 		var val = $(this).val();
@@ -69,20 +69,21 @@ function del(){
 	});
 		console.log('delArr : ',delArr);
 	
-	//서버로 부터 뭐가 삭제 됬는 지 확인 하는 방법
-	$.ajax({
-		type:'post',
-		url :'./del',
-		data:{delList:delArr},
-		dataType:'json',
-		success:function(data){
-			if(data.cnt>0){
+	
+	//서버로 부터 뭐가 삭제 됬는 지 확인 하는 방법(내가 선택한 것이 제데로 삭제 됬는지 확인)
+	$.ajax({ //컨트롤 러로 아작스의 데이터를 보내준다(그리고 받는다)
+		type:'post', //method 전달법
+		url :'./del', //주소 설정
+		data:{delList:delArr},  //컨트롤러로 보낼 파라메터값(키:값)
+		dataType:'json', //아작스 타입
+		success:function(data){ // 성공
+			if(data.cnt>0){ //삭제된 데이터가 0이상일경우
 				alert('선택하신'+data.cnt+'개의 글의 삭제 되었습니다');
-				$('#list').empty();
+				$('#list').empty(); //선택한 내용을 지운다
 				listCall();
 			}
 		},
-		error:function(error){
+		error:function(error){ //실패
 			console.log(error);
 		}
 	});
@@ -97,6 +98,7 @@ $('#all').on('click',function(){
 	// attr : 정적 속성 : 처음부터 그려져 있거나 jsp 에서 그린 내용
 	// prop : 동적속성 : 자바스크립트로 나중에 그려진 내용
 	//.is()특정 값을 비교한 다음 t,f로 반환
+	// 만약 t라면 input[name = "del"]라는 이름을 가지고 있는 input의 checked를 활성화 해라
 	if($('#all').is(":checked")){
 		$chk.prop('checked',true);
 	}else{
@@ -110,7 +112,8 @@ $('#all').on('click',function(){
 	if(msg != ''){
 		alert(msg);
 	}
-	
+
+//리스트 출력
 //아작스가 들어 있는 메서드 호출
 function listCall(){
 	//아작스 기본 툴

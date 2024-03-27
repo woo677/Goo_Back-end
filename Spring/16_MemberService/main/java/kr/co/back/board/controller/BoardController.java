@@ -29,6 +29,7 @@ public class BoardController {
 		return "list";
 	}
 	
+	//아작스 리스트 출력
 	@RequestMapping(value = "/list.ajax")
 	@ResponseBody
 	public Map<String, Object> listCall(){

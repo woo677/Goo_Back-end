@@ -1,5 +1,7 @@
 package kr.co.back.member.service;
 
+import java.util.Map;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -22,6 +24,12 @@ public class MemberService {
 	public int overlay(String id) {
 
 		return backDAO.overlay(id);
+	}
+
+	public void joinForm(Map<String, String> param) {
+		int row = -1;
+		row = backDAO.joinForm(param);
+		logger.info("row : "+row);
 	}
 
 

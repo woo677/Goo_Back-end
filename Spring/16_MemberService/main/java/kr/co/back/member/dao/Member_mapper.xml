@@ -12,5 +12,9 @@
 	<select id="overlay" resultType="int">
 		SELECT COUNT(id) FROM member WHERE id = #{param1}
 	</select>
+	
+	<insert id="joinForm" parameterType="map">
+		INSERT INTO member(id,pw,name,age,gender,email)VALUES(#{id},#{pw},#{name},#{age},#{gender},#{email})
+	</insert>
 
 </mapper>
