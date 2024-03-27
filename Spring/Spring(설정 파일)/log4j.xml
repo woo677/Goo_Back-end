@@ -9,7 +9,8 @@
 			<param name="ConversionPattern" value="%-5p: %c - %m%n" />
 		</layout>
 	</appender>
-	
+
+	<!-- 로걸을 찍을려면 이 부분의 3단 페키지를 수정해라 -->
 	<!-- Application Loggers -->
 	<logger name="my.project.member">
 		<level value="info" />
