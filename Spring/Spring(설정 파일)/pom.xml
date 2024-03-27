@@ -44,7 +44,8 @@
 		    <artifactId>mariadb-java-client</artifactId>
 		    <version>2.7.3</version>
 		</dependency>
-		
+
+		<!-- pool을 쓸때 쓰는 라이브러리  -->
 		<!-- connection pool  -->
 		<!-- https://central.sonatype.com/artifact/commons-dbcp/commons-dbcp -->
 		<dependency>
@@ -52,7 +53,9 @@
 		    <artifactId>commons-dbcp</artifactId>
 		    <version>1.4</version>
 		</dependency>
-		
+
+
+		<!-- connection pool  -->
 		<!-- spring-jdbc -->
 		<dependency>
 		    <groupId>org.springframework</groupId>
