@@ -37,4 +37,16 @@
     	password="pass"
     />
 
+	<!-- DB 서정 방법
+	<Resource
+          name = "jdbc/MariaDB" //부를 이름 (통상적으로 자신이 사용하는 DB명을 사용한다)
+          auth = "Container" //권한   
+          type = "java.sql.DataSource"//
+          driverClassName = "org.mariadb.jdbc.Driver" //DB driverClassName 
+          url = "jdbc:mariadb://localhost:3306/mydb" //DB URL
+          username = "web_user" // DB username 
+          password = "pass" // DB password 
+        />
+	-->
+
 </Context>
