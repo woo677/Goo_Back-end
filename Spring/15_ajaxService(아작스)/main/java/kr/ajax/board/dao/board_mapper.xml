@@ -15,6 +15,13 @@
 			b.reg_date
 	FROM bbs b ORDER BY idx DESC;
 </select>
-	
 
+	<select id="getFiles" resultType="String">
+		SELECT new_filename FROM photo WHERE idx = #{param1}
+	</select>
+
+	<delete id="del" parameterType="String">
+		DELETE FROM bbs WHERE idx = #{idx}
+	</delete>
+		
 </mapper>

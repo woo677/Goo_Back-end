@@ -49,6 +49,12 @@ public class BoardDTO {
 	public void setbHit(int bHit) {
 		this.bHit = bHit;
 	}
+	
+	//방법1
+//	public String getReg_date() {
+//		return reg_date.toString();
+//	}
+	
 	public Date getReg_date() {
 		return reg_date;
 	}
