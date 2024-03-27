@@ -45,6 +45,11 @@
 	</table>
 </body>
 <script>
+//$(document).ready : HTML문서가 처음부터 끝까지 다 읽고 실행해라 (옛날 코드에서만 쓴다) 바디에 들어가면 안써도 된다, 해드면 써야 한다
+$(document).ready(function(){
+	listCall();
+});
+
 function del(){ // 체크 표시된 value을 delArr에 담아보자
 	var delArr = [];
 	$('input[name ="del"]').each(function(idx,item){
@@ -64,6 +69,11 @@ function del(){ // 체크 표시된 value을 delArr에 담아보자
 		dataType:'JSON',
 		success:function(data){
 			console.log(data.cnt);
+			if (data.cnt>0) {
+				alert('선택하신'+data.cnt+'개의 글이 삭제 되었습니다')
+				$('#list').empty();
+				listCall();
+			}
 		},
 		error:function(error){
 			console.log(error);
@@ -75,6 +85,7 @@ $('#all').on('click',function(){
 	var $chk = $('input[name="del"]');	
 	// attr : 정적 속성 : 처음부터 그려져 있거나 jsp 에서 그린 내용
 	// prop : 동적속성 : 자바스크립트로 나중에 그려진 내용
+	//.is()특정 값을 비교한 다음 t,f로 반y
 	if($(this).is(":checked")){
 		$chk.prop('checked',true);	
 	}else{
@@ -83,7 +94,9 @@ $('#all').on('click',function(){
 });
 	
 	
+	
 //왔으면 요청 한다
+function listCall(){
 		$.ajax({
 			type:'get', //method 방식
 			url:'./list.ajax', // 컨트롤러에 리퀘스트 주소
@@ -96,6 +109,7 @@ $('#all').on('click',function(){
 				console.log(error);
 			}
 		});
+}
 		
 function drawList(list){
 	var content ='';
