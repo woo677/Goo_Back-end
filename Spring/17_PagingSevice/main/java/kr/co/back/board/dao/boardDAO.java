@@ -12,7 +12,7 @@ public interface boardDAO {
 
 	int del(String idx);
 
-	Object allCount(int pageParCnt);
+	int allCount(int pageParCnt);
 
 
 }

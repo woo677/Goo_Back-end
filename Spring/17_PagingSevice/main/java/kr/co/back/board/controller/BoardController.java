@@ -13,7 +13,6 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-import kr.co.back.board.dto.BoardDTO;
 import kr.co.back.board.service.BoardService;
 
 
@@ -30,20 +29,20 @@ public class BoardController {
 	}
 	
 	//아작스 리스트 출력
-	@RequestMapping(value = "/list.ajax")
-	@ResponseBody
-	public Map<String, Object> listCall(String page,String cnt){
+	@RequestMapping(value="/list.ajax")
+	@ResponseBody // response 객체로 반환
+	public Map<String, Object> listCall(String page,String cnt) {
 		logger.info("listCall 요청");
-		logger.info("페지지당 보여줄 갯수 : "+cnt);
+		logger.info("페이지당 보여줄 갯수 : "+cnt);
 		logger.info("요청 페이지 : "+page);
 		
-		int currPage = Integer.parseInt(page);
+		int currPage = Integer.parseInt(page); //문자를 숫자로 바꿈
 		int pageParCnt = Integer.parseInt(cnt);
+		
 		
 		Map<String, Object> map = boardService.list(currPage,pageParCnt);
 		
-		
-		return map;
+		return map; //json 과 가자 닮은 map으로 반환
 	}
 	
 	//배열 형태로 들어올 경우 따로 명시를 해 줘야 한다

@@ -5,8 +5,6 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import javax.sound.sampled.Line;
-
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -27,7 +25,7 @@ Logger logger = LoggerFactory.getLogger(getClass());
 	public Map<String, Object> list(int currPage, int pageParCnt) {
 		logger.info("서비스 접근");
 		
-		int start = 1;
+		int start = (currPage-1)*pageParCnt;
 		
 		Map<String, Object> result = new HashMap<String, Object>();
 		List<BoardDTO> list = boarddao.list(pageParCnt,start);

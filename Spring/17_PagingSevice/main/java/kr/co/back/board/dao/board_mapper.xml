@@ -13,12 +13,16 @@
 			b.user_name,
 			b.bHit, 
 			b.reg_date
-	FROM bbs b ORDER BY idx DESC;
+	FROM bbs b ORDER BY idx DESC LIMIT #{param1} OFFSET #{param2}
 </select>
 
 <delete id="del" parameterType="String">
 	delete from bbs where idx = #{param1}
 </delete>
+
+<select id="allCount" resultType="Integer">
+	SELECT CEIL(COUNT(idx)/#{param1}) AS pages FROM bbs
+</select>
 
 <select id="getFilse" resultType="String">
 		select new_filename from photo where idx =#{param1}
