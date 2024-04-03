@@ -1,0 +1,15 @@
+<!-- 컨트 롤러에 코드를 써야 페이지에 오류 코드가 안 나온다 -->
+
+  @RequestMapping(value="/error/404")
+	public String notFound(Model model) {
+		model.addAttribute("code", "404");
+		model.addAttribute("msg", "없는 페이지 또는 요청입니다.");
+		return "error";
+	}
+	
+	@RequestMapping(value="/error/500")
+	public String serverError(Model model) {
+		model.addAttribute("code", "500");
+		model.addAttribute("msg", "서버에서 처리중 문제가 발생 했습니다.");
+		return "error";
+	}
