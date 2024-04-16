@@ -70,7 +70,7 @@ public class BoardService {
 		//1. 업로드할 파일 명이 있는가
 		String fileName = photos.getOriginalFilename();
 		logger.info("fileName"+fileName);
-		if(!fileName.equals("")) { // 파일일면이 있다면 == 업로드 파일이 있다면
+		if(!fileName.equals("")) { // 파일이 있다면 == 업로드 파일이 있다면
 			//1. 기존 파일명에서 화가장자 추출(high.gif)
 			
 			/*
