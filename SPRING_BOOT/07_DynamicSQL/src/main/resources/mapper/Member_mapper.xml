@@ -52,6 +52,64 @@
 				</where>
 
 		</select>
+		
+		
+		<!-- collection : 컬렉션프레임 워크 -->
+		<!-- item : 덩어리를 하나하나 씩 빼줄때의 이름 -->
+		<!-- separator : 구분자  -->
+		<!-- SELECT * FROM member WHERE name = 'a' OR name = 'test'  -->
+<!-- 		<select id="multi" parameterType="list" resultType="member">
+			SELECT * FROM member 
+			<where>
+				<foreach collection="list" item="item" separator="OR">
+					name = #{item}
+				</foreach>
+			</where> 
+		</select> -->
+		
+		<!-- collection : 컬렉션프레임 워크 -->
+		<!-- item : 덩어리를 하나하나 씩 빼줄때의 이름 -->
+		<!-- separator : 구분자  -->
+		<!-- open : for문이 실행 되기 전에 실행 되야 할게 있어? -->
+		<!-- close : for문이 실행 되고나서 실행 되야 할게 있어? -->
+		<!-- SELECT * FROM member WHERE name = 'a' OR name = 'test'  -->
+		<select id="multi" parameterType="list" resultType="member">
+			SELECT * FROM member 
+			<where>
+				name IN
+				<foreach collection="list" item="item" open="(" separator="," close=")">
+					 #{item}
+				</foreach>
+			</where> 
+		</select>
+		
+		
+		<!-- 
+			문제 : 수정 하고 싶지 않는 것들을 입력 하지 안았을때 오류가 아니라 데이터가 수정 되지 않게 해라00
+		 -->
+		<!-- 입력하지 않은 정보는 수정되지 않게 하고 싶다 -->
+		<!-- 이때, 가 문제가 되는데 set 태그를 사용 하면 불필요한 , 는 알아서 제거해 준다 -->
+		<update id="update" parameterType="map">
+			UPDATE member 
+			<set>
+				<if test="!pw.equals('')">
+					pw=#{pw},
+				</if>
+				<if test="!name.equals('')">
+					name=#{name},
+				</if>
+				<if test="!age.equals('')">
+					age=#{age},
+				</if>
+				<if test="gender != null">
+					gender=#{gender},
+				</if>
+				<if test="!email.equals('')">
+					email=#{email}
+				</if>
+			</set>		
+			WHERE id=#{id}
+		</update>
 	
 </mapper>
 

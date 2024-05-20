@@ -61,4 +61,24 @@ public class MemberService {
 		return mav;
 	}
 
+	public ModelAndView multi(List<String> name) {
+		ModelAndView mav = new ModelAndView("list"); //바로 리스트 페이지로 보낼수 있다
+		List<MemberDTO> list = dao.multi(name);
+		mav.addObject("list",list);
+		return mav;
+	}
+
+	public ModelAndView update(Map<String, Object> param) {
+		ModelAndView mav = new ModelAndView("result");
+		int row = 0;
+		row = dao.update(param);
+		
+		String msg = param.get("id")+"에 대한 정보를 수정 했습니다";
+		if (row<1) {
+			msg = param.get("id")+"에 대한 정보를 실패 했습니다";
+		}
+		 mav.addObject("msg"+msg);
+		return mav;
+	}
+
 }

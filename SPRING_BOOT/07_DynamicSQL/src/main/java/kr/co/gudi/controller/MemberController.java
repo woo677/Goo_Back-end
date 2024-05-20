@@ -1,5 +1,6 @@
 package kr.co.gudi.controller;
 
+import java.util.List;
 import java.util.Map;
 
 import org.slf4j.Logger;
@@ -9,6 +10,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
@@ -50,6 +52,21 @@ public class MemberController {
 		logger.info("params : {}",params);
 		
 		return service.list(params);
+	}
+	
+	//{} : 복수개의 메서드를 수용하는 법
+	//@RequestMapping은 복수개의 메서드를 수용 할 수 있다.
+	@RequestMapping(value = "/multi.do",method = {RequestMethod.GET,RequestMethod.POST})
+	public ModelAndView multi(@RequestParam List<String> name) {
+		logger.info("name = "+name);
+		return service.multi(name);
+	}
+	
+	@PostMapping(value = "/update.do")
+	public ModelAndView update(@RequestParam Map<String, Object> param) {
+		logger.info("param : "+param);
+		
+		return service.update(param);
 	}
 	
 }
