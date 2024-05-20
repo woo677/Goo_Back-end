@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC	"-//mybatis.org//DTD Mapper 3.0//EN"
+	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+	
+<mapper namespace="kr.co.gudi.dao.MemberDAO">
+	
+	<select id="login" resultType="String">
+		select id from member where id=#{param1} AND pw = #{param2}
+	</select>
+	
+	<select id="list" resultType="Member">
+		select idx
+			,user_name
+			,subject
+			,content
+			,bHit
+			,reg_date 
+		FROM bbs
+	</select>
+	
+	<select id="detail" resultType="Member">
+		select idx
+			,user_name
+			,subject
+			,content
+			,bHit
+			,reg_date 
+		FROM bbs WHERE idx = #{param1}
+	</select>
+	
+	<update id="bHit">
+		update bbs set bHit=bHit+1 where idx = #{param1} 
+	</update>
+	
+	<delete id="del">
+		delete from bbs where idx =#{param1}
+	</delete>
+	
+	<insert id="write">
+		insert bbs(subject,user_name,content)values(#{subject},#{user_name},#{content})
+	
+	</insert>
+	
+</mapper>
