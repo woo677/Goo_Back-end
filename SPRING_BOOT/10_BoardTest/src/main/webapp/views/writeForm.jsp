@@ -5,8 +5,9 @@
 	<meta charset="UTF-8">
 	<title>Insert title here</title>
 	<script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+	<link rel="stylesheet" href="css/common.css" type="text/css">
 	<style>
-		
+
 	</style>
 	</head>
 	<body>
@@ -14,11 +15,11 @@
 	<table>
 		<tr>
 			<th>제목</th>
-			<td><input type ="text" name = "subject" value="${member.subject}"/></td>
+			<td><input type ="text" name = "subject"/></td>
 		</tr>	
 		<tr>
 			<th>작성자</th><!-- sessionScope.loginId는 세션에 있는 값을 가져온다 -->
-			<td>${sessionScope.loginId}<input type ="hidden" name = "user_name" value="${sessionScope.loginId}"/></td>
+			<td><input type ="text" name = "user_name" value="${sessionScope.loginId}" readonly/></td>
 		</tr>
 		<tr>
 		<th>내용</th>

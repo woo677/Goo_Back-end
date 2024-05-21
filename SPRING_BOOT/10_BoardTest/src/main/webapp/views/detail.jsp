@@ -5,12 +5,8 @@
 	<meta charset="UTF-8">
 	<title>Insert title here</title>
 	<script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+	<link rel="stylesheet" href="css/common.css" type="text/css">
 	<style>
-			table,th,td{
-			border: 1px solid black;
-			border-collapse: collapse;
-			padding: 5px 10px
-		}
 	</style>
 	</head>
 	<body>
@@ -18,33 +14,29 @@
 		<table>
 			<tr>
 				<td>글번호</td>
-				<th>${bbs.idx }</th>
+				<th>${dto.idx }</th>
 			</tr>
 			<tr>
 				<td>조회수</td>
-				<th>${bbs.bHit }</th>
+				<th>${dto.bHit }</th>
 			</tr>
 			<tr>
 				<td>제목</td>
-				<th>${bbs.subject} </th>
+				<th>${dto.subject} </th>
 			</tr>
 			<tr>
 				<td>내용</td>
-				<th>${bbs.content} </th>
+				<th>${dto.content} </th>
 			</tr>
 			<tr>
 				<td colspan="2">
-					<a href="./list">리스트 돌아가기</a>
-				</td>
-			</tr>
-			<tr>
-				<td colspan="2">
-					<button>수정</button>
+					<button onclick="location.href='./list'">리스트</button>
+					<button onclick="location.href ='modify?idx=${bbs.idx }'">수정</button>
 				</td>
 			</tr>
 		</table>
 	</body>
 	<script>
-		
+	location.href ='modify
 	</script>
 </html>

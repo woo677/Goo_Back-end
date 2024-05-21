@@ -9,10 +9,10 @@
 		<relativePath/> <!-- lookup parent from repository -->
 	</parent>
 	<groupId>com.example</groupId>
-	<artifactId>10_BoardTest</artifactId>
+	<artifactId>10_Board</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
 	<packaging>war</packaging>
-	<name>10_BoardTest</name>
+	<name>10_Board</name>
 	<description>Demo project for Spring Boot</description>
 	<properties>
 		<java.version>11</java.version>
@@ -23,25 +23,19 @@
 			<artifactId>spring-boot-starter-web</artifactId>
 		</dependency>
 		
-		
-		
-		
-		
-		
-		
-		
+		<!-- myBatis -->
 		<dependency>
 			<groupId>org.mybatis.spring.boot</groupId>
 			<artifactId>mybatis-spring-boot-starter</artifactId>
 			<version>2.3.2</version>
 		</dependency>
-
+		
+		<!-- mariaDB -->
 		<dependency>
 			<groupId>org.mariadb.jdbc</groupId>
 			<artifactId>mariadb-java-client</artifactId>
 			<scope>runtime</scope>
 		</dependency>
-		
 		
 		<!-- jsper -->
 		<!-- tomcat 버전 통일 필요 주의 -->
@@ -67,10 +61,6 @@
 		    <artifactId>log4jdbc-log4j2-jdbc4.1</artifactId>
 		    <version>1.16</version>
 		</dependency>
-		
-		
-		
-		
 		
 		
 		<dependency>
