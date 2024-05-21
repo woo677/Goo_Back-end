@@ -69,7 +69,8 @@ public class MainController {
 		info.setPromotion(false);
 		return info;
 	}
-	
+
+	//복잡한 ajax(JSON)을 받을때는
 	//파라메터를 받을때 @ResponseBody 로 받아야 한다
 	@RequestMapping(value = "/rest/complex.ajax")
 	public Map<String, Object> complex(
