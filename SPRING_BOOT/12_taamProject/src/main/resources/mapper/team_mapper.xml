@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC	"-//mybatis.org//DTD Mapper 3.0//EN"
+	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="kr.co.gudi.dao.MainDAO">
+	
+	<!--팀원 목록 가져오기 -->
+	<select id="getTeamList" resultType="team">
+			select team_name
+				,project_name
+				,team_leader
+				,staff1
+				,staff2
+				,staff3
+				,staff4
+				,staff5 
+			from team_project
+	</select>
+	
+<!-- 	<update id="update">
+		UPDATE team_project SET ${param1}=#{param2} where team_name = #{param3}
+	</update> -->
+	
+	<update id="update" parameterType="map">
+		UPDATE team_project SET 
+		<if test="col =='project_name'">
+			project_name=#{val} 			
+		</if>
+		<if test="col == 'team_leader'">
+			team_leader=#{val} 			
+		</if>
+		<if test="col == 'staff1'">
+			staff1=#{val} 			
+		</if>
+		<if test="col == 'staff2'">
+			staff2=#{val} 			
+		</if>
+		<if test="col == 'staff3'">
+			staff3=#{val}	
+		</if>
+		<if test="col == 'staff4'">
+			staff4=#{val} 			
+		</if>
+		<if test="col == 'staff5'">
+			staff5=#{val}		
+		</if>
+				where team_name = #{pk}
+	</update>
+	
+	
+</mapper>
