@@ -13,6 +13,11 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.core.type.TypeReference;
+import com.fasterxml.jackson.databind.JsonMappingException;
+import com.fasterxml.jackson.databind.ObjectMapper;
+
 import kr.co.gudi.dto.UserInfo;
 
 @RestController
@@ -69,13 +74,13 @@ public class MainController {
 		info.setPromotion(false);
 		return info;
 	}
-
-	//복잡한 ajax(JSON)을 받을때는
+	
 	//파라메터를 받을때 @ResponseBody 로 받아야 한다
 	@RequestMapping(value = "/rest/complex.ajax")
 	public Map<String, Object> complex(
 							@RequestBody Map<String, Object> param){
 		
+
 		logger.info("param : {}",param);
 		//param : {values={name=숫자넣기, num=[1, 2, 3, 4, 5]}}
 		
@@ -96,6 +101,47 @@ public class MainController {
 		map.put("success", true);
 		
 		return map;
+	}
+	
+	@GetMapping(value = "/rest/strMap.ajax")
+	public Map<String, Object> strMap() throws Exception{
+		//json 형태의 문자열(다른 서버에 요청할 경우 이렇게 json 형태의 문자열을 받게 된다)
+		String json = "{\"on\":1,\"msg\":\"HahMap 변환 완료\",\"name\":\"정민우\"}";
+
+		//문자열을 자바로 바꾸는 법
+		
+		//jackson을 여기서 사용함
+		ObjectMapper mapper = new ObjectMapper();
+		// 어떤 문자열을, 어떤 데이터 타입으로 변환 할래?
+		// Map의 제너릭이 지정되지 않아 비효율 적이라고 경고!
+		// <> : 제너릭이 있는 경우에는 참조 할게 있어야한다
+		//Map<String, Object> result = mapper.readValue(json, Map.class);
+		Map<String, Object> result = mapper.readValue(json, new TypeReference<Map<String, Object>>() {});
+		logger.info("on : "+result.get("on"));
+		logger.info("msg : "+result.get("msg"));
+		logger.info("name : "+result.get("name"));
+		
+		return result;
+	}
+	
+	@GetMapping(value = "/rest/strObject.ajax")
+	public UserInfo strObject() throws Exception{
+		//json 형태의 문자열(다른 서버에 요청할 경우 이렇게 json 형태의 문자열을 받게 된다)
+		String json = "{\"id\":\"json_ID\",\"name\":\"홍길동\",\"age\":33,\"promotion\":true}";
+
+		//문자열을 자바로 바꾸는 법
+		
+		//jackson을 여기서 사용함
+		ObjectMapper mapper = new ObjectMapper();
+		
+		//<> 제너릭이 없기 때문에 참조할것이 따로 없다
+		UserInfo info = mapper.readValue(json, UserInfo.class);
+		logger.info("id : "+info.getId());
+		logger.info("name : "+info.getName());
+		logger.info("age : "+info.getAge());
+		logger.info("Promotion : "+info.isPromotion());
+		
+		return info;
 	}
 	
 	

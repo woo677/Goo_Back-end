@@ -10,7 +10,7 @@
 	</style>
 	</head>
 	<body>
-		<h3>RESTFUL  API 페이지</h3>
+		<h3>RESTFUL(레스트 풀)  API 페이지</h3>
 		<ul>
 			<li>/rest/list.ajax : List 형태로 반환 <button onclick="sendAjax('list.ajax')">sample1</button> </li>
 			<li>/rest/map.ajax : Map 형태로 반환 <button onclick="sendAjax('map.ajax')">sample2</button></li>
@@ -19,9 +19,18 @@
 		<h3>복잡한 형태의 JSON 을 전송할때</h3>
 		<button onclick="complex()">sample4</button>
 		
+		
 		<h3>Server 에서 문자열 형태로 온 JSON 을 전달하고 싶아면?</h3>
+		<p>서버와 서버의 통신 API 자바에서 사용하는 법</p>
 		<p>json 형태의 문자열을 서버에서도 JAVA(JSON) 객체 형대(List,DTO,Map 등....)로 변경이 가능 하다.</p>
 		<p>이때 필요한 라이브러리가 jackson-databaind 이다.</p>
+		<p>
+			{"on":1,"msg":"HahMap 변환 완료","name":"정민우"}
+			<button onclick="sendAjax('strMap.ajax')">sample5</button>
+		</p>
+		<p>
+			{"id":"json_ID","name":"홍길동","age":33,"promotion":true}
+			<button onclick="sendAjax('strObject.ajax')">sample6</button> </p>
 	</body>
 	<script>
 		function sendAjax(req){
@@ -56,7 +65,7 @@
 				url:'./rest/complex.ajax',
 				data:JSON.stringify(param),// JSON 을 문자열로 변환해서 보내야 한다
 				dataType:'JSON',
-				contentType:'application/json; charset=utf-8', // content-type 명시
+				contentType:'application/json; charset=utf-8', // content-type 명시(한글깨짐 방지)
 				success:function(data){
 					console.log(data);
 				},
