@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+<title>Insert title here</title>
+<style>
+
+</style>
+</head>
+<body>
+	<input type="text" id="msg">
+    <button onclick="getsend()">GET SEND</button>
+    <br/><br/>
+    <input type="number" id="cnt">
+    <button onclick="postsend()">POST SEND</button>
+    <p><button onclick="fluxTest()">FLUX TEST</button></p>
+</body>
+<script>
+    // get 방식으로 서버로 데이터를 보내면 -> 받은 데이터를 다른 서버로 보낸다
+    // 다른서버에서는 받은 데이터를 -> 보낸 서버러 되돌려 보내고 -> 이것을 클라이언트로 되돌려 준다
+    function getsend(){
+        var val = $('#msg').val();
+        console.log("get send : ",val);
+        $.ajax({
+            type:'get',
+            url:'/get/send/'+val,
+            dataType:'JSON',
+            success:function(data){
+                console.log(data);
+            },
+            error:function(e){
+                console.log(e);
+            }
+        });
+    }
+
+    //입력한  숫자만큼의 크기를 갖는 리스트를 받는다
+    function postsend(){
+        var val = $('#cnt').val();
+        console.log("post send : ",val);
+        // 전송 : 헤더 바디(둘의 경계는 공백 한줄)
+        // 헤더 : 지금부터 보낼 문서에대한 사전정보(헤더에 보통 인증 키 등을 보내느 경우가 많다.)
+        // 바디 : 보낼 본문
+
+
+        $.ajax({
+            type:'post',
+            url:'/post/send/'+val,
+            dataType:'JSON',
+            beforeSend:function(obj){ //해더 
+                obj.setRequestHeader('Authorization','ACB7678DR98F'); //인증키 명은 보통 (Authorization) 이렇게 정의 한다
+            },
+            success:function(data){
+                console.log(data);
+            },
+            error:function(e){
+                console.log(e);
+            }
+        });
+    }
+    function fluxTest(){
+        console.log('flux send');
+        $.ajax({
+            type:'GET',
+            url:'/get/fluxTest',
+            dataType:'JSON',
+            success:function(data){
+                console.log(data);
+            },
+            error:function(e){
+                console.log(e);
+            }
+        });
+        location.href
+    }
+</script>
+</html>
