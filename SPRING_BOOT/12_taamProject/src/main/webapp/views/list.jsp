@@ -111,7 +111,7 @@ listCall();
    		data:{},
    		dataType:'JSON',
    		success: function(data) {
-   			
+   			location.reload();
    		},
    		error: function(e) {
             console.log(e);

@@ -16,10 +16,18 @@
 			from team_project
 	</select>
 	
-<!-- 	<update id="update">
+<!-- 	
+	${}: 은 변수에 있는 값을 컬럼으로 지정할때 사용
+	#{} : 은 값 주위에 강제적으로 싱클쿼터가 찍히는 반면 (무조건 문자열로 '' 으로 찍는다)
+	${} : 은 찍히지 않기 때문 
+			하지만 보안상으로 사용을 권고하지 않는다.
+			* 컬럼을 사용자가 임의로 지정할수 있기 때문이다
+			예) team_name 은 pk 이기 때문에 수정하면 안되지만 사용자가 지정할수 있게 된다
+<update id="update">
 		UPDATE team_project SET ${param1}=#{param2} where team_name = #{param3}
 	</update> -->
 	
+	<!-- 조건문을 쓸대는 #{}이렇게 쓰는게 아니라 걍 변수 이름을 불러야함 -->
 	<update id="update" parameterType="map">
 		UPDATE team_project SET 
 		<if test="col =='project_name'">
